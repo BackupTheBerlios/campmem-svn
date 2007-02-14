@@ -32,7 +32,9 @@ import javax.microedition.lcdui.*;
  */
 public class BlogEntryCreateMenu extends VisualMenu
 {
-    public Displayable m_displayable;
+    private Displayable             m_displayable;
+    private TextField               m_titleField;
+    private TextField               m_bodyField;
     
     /** 
      */
@@ -46,8 +48,16 @@ public class BlogEntryCreateMenu extends VisualMenu
      */
     private void createMenu()
     {
-        m_displayable = new Form("Create a new Blog Entry");
+        Form menuForm = new Form("Create a new Blog Entry");
+        m_displayable = menuForm;
         m_displayable.setCommandListener(this);
+        //create textField that will contain the blog's title
+        m_titleField = new TextField("Title", "", 25, TextField.ANY);
+        menuForm.append(m_titleField);
+        //create textField that will contain the blog's body
+        m_bodyField = new TextField("Body","",500, TextField.ANY);
+        m_bodyField.setLayout(Item.LAYOUT_VEXPAND);
+        menuForm.append(m_bodyField);
         //add commands
         m_displayable.addCommand(CampusConstants.K_BACK_COMMAND);
         m_displayable.addCommand(CampusConstants.K_SUBMIT_COMMAND);
@@ -59,7 +69,22 @@ public class BlogEntryCreateMenu extends VisualMenu
     {
         if (c == CampusConstants.K_SUBMIT_COMMAND)
         {
-           
+           //get the entered blog parameters
+           String title = m_titleField.getString();
+           String body = m_bodyField.getString();
+           //maybe it's a good idea to make one state for the object id, this state can be updated 
+           //and queried whenever the object id is needed.           
+           String objectID = ""; 
+           String categories = "";           
+           //post the blog entry to the blog
+           try
+           {
+               CampusConstants.K_BLOGGER_STUB.post(CampusConstants.K_MOBILE_ID, objectID, categories, title, body);
+           }
+           catch (java.rmi.RemoteException e)
+           {
+               e.printStackTrace();
+           }
         }
         else
         {

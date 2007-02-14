@@ -85,17 +85,16 @@ public class SemaCodeSensor extends Sensor
 	{
             try
 	    {               
-System.out.println("startSensor");
                 Canvas videoCanvas = m_canvasMenu.getCanvas();
-	    	this.getDisplay().setCurrent(videoCanvas);
+	    	videoCanvas.setFullScreenMode(true);
+                this.getDisplay().setCurrent(videoCanvas);
                 
-                m_player = Manager.createPlayer("capture://video");
-                                 	    	 	
+                
+                m_player = Manager.createPlayer("capture://video");                              	    	 	
                
                 m_player.realize();
                 m_player.prefetch();     
-	    	m_videoControl = (VideoControl)m_player.getControl("VideoControl");
-	    	
+	    	m_videoControl = (VideoControl)m_player.getControl("VideoControl");	    	
                   
                 m_videoControl.initDisplayMode(VideoControl.USE_DIRECT_VIDEO, videoCanvas);
                                 
@@ -103,18 +102,16 @@ System.out.println("startSensor");
 	    	{
 	    		m_videoControl.setDisplayFullScreen(false);
                         m_videoControl.setVisible(true);
-                        m_player.start(); 
+                        m_player.start();                         
 	    	}
 	    	catch(MediaException me2)
-	    	{
-	    		//mMidlet.handleException( new RuntimeException("can't display viewfinder! " + me2) );
+	    	{	    		
 	    		me2.printStackTrace();
 	    	}  	                              
 		
 	    }
 	    catch(Exception e)
-	    {
-	    	//mMidlet.handleException(e);
+	    {	    	
 	    	e.printStackTrace();
 	    }
 	}
@@ -131,7 +128,7 @@ System.out.println("startSensor");
 		try
                 {
                   m_videoControl.setVisible(false);
-                  m_decodeThread.interrupt();
+                  //m_decodeThread.interrupt();
                   //return the player into the realised state
                   //m_player.deallocate();
                   //m_player.stop();
@@ -164,14 +161,12 @@ System.out.println("startSensor");
 
                 public void run()
                 {
-System.out.println("in run -2");                        
                     Image semaCodeImage = null;
                     try
                     {                       
                         byte[] raw = m_videoControl.getSnapshot(null);
-            System.out.println("in run -1");
                         semaCodeImage = Image.createImage(raw, 0, raw.length);
-            System.out.println("in run 0");
+                        stopSensor();
                     }
                     catch (Exception e)
                     {
@@ -182,12 +177,10 @@ System.out.println("in run -2");
                         String semaCode = "";
                         try
                         {
-System.out.println("in run 1");
                                 //convert the captured semacode into an id
                                 VisualTagConnection vtc = new VisualTagConnection();
-System.out.println("in run 2");                                
                                 semaCode = vtc.readVisualTag(semaCodeImage, "Data Matrix");
-System.out.println("in run 3");                                
+
                                 if (semaCode == null)
                                 {
                                         semaCode = "-1";
