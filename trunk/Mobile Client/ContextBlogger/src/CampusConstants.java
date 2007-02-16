@@ -25,8 +25,10 @@ import blogger.*;
  */
 public class CampusConstants
 {	
+        public static final String  K_MIDLET_NAME                               = "ContextBlogger";
         public static String        K_MOBILE_ID;
-    
+        public static String        K_BERLIOS_URL                               = "http://campmem.berlios.de/ServiceURL.php";
+        
         public static final String  K_OBJECT_ID_KEY				= "OBJECT_ID";
 	public static final String  K_SENSOR_OWNER				= "SENSOR_OWNER";
 	public static final String  K_CANVAS_KEY				= "CANVAS_KEY";

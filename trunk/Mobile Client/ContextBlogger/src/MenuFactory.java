@@ -60,9 +60,8 @@ public class MenuFactory
 		State loginState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_LOGIN_STATE);
 		LoginMenu loginMenu = new LoginMenu(m_ownerDisplay, loginState, CampusConstants.K_MOBILE_ID);
 
-		//compose mainMenu
-		String title = "Campus Memories";
-		m_mainMenu = new ItemMenu(m_ownerDisplay, title);                
+		//compose mainMenu		
+		m_mainMenu = new ItemMenu(m_ownerDisplay, CampusConstants.K_MIDLET_NAME);                
                 
 		State state = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CURRENT_SENSOR);
 		VisualMenu sensorListMenu = buildSensorMenu(state);
@@ -83,9 +82,8 @@ public class MenuFactory
         
         private VisualMenu buildMainMenu(VisualMenu scanObjectMenu, VisualMenu sensorMenu, VisualMenu blogFilterMenu)
         {
-            //compose mainMenu
-            String title = "Campus Memories";
-            ItemMenu mainMenu = new ItemMenu(m_ownerDisplay, title);  
+            //compose mainMenu            
+            ItemMenu mainMenu = new ItemMenu(m_ownerDisplay, CampusConstants.K_MIDLET_NAME);  
             
             State state = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CURRENT_SENSOR);
             mainMenu.addMenuItem("Scan New Object", scanObjectMenu);

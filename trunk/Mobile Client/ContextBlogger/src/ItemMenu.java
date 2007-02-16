@@ -79,7 +79,8 @@ public class ItemMenu extends VisualMenu
         public void removeAll()
         {
             Vector children = getChildren();
-            for (int i = 0; i < children.size();i++)
+            int numChildren = children.size();
+            for (int i = 0; i < numChildren;i++)
             {
                 Menu menu = (Menu)children.firstElement();
                 this.removeChild(menu);

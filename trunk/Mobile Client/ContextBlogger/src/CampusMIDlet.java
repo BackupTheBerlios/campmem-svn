@@ -17,8 +17,10 @@
  */
 import java.util.Hashtable;
 import java.util.Enumeration;
+import java.io.*;
 import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
+import javax.microedition.io.*;
 
 /**
  */
@@ -50,8 +52,17 @@ public class CampusMIDlet
 		/**
 		 */
 		public void startApp()
-		{                    
-                    //CampusConstants.K_MOBILE_ID = getAppProperty(K_MOBILE_ID_KEY);
+		{            
+                    try
+                    {
+                        String serverURL = getServerURL();                        
+                        System.out.println(serverURL);
+                    }
+                    catch(IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    
                     LoginMenu loginMenu = m_menuFactory.buildLoginMenu();
                     m_display.setCurrent(loginMenu.getDisplayable());
                     loginMenu.startLogin();
@@ -149,6 +160,98 @@ public class CampusMIDlet
                 {
                     //TODO make this the Mobile Phone Identification Number
                     return "123";
+                }
+                
+                /** Gets the address from the Context Blogger Service Server, from our berlios server.
+                 *  The Context Blogger Service Server can migrate over time, while the berlios server
+                 *  will most probably not. Therefore, we decided to query the berlios server for the 
+                 *  address of the Context Blogger Service Server and connect to that address afterwards.
+                 */
+                private String getServerURL() throws IOException
+                {                    
+                    String serverURL  = "";
+                     
+                    HttpConnection c = null;
+                    InputStream is = null;
+                    OutputStream os = null;
+                    int rc;
+
+                    try 
+                    {
+                        c = (HttpConnection)Connector.open(CampusConstants.K_BERLIOS_URL);
+
+                        // Set the request method and headers
+                        c.setRequestMethod(HttpConnection.POST);
+                        c.setRequestProperty("If-Modified-Since",
+                            "29 Oct 1999 19:43:31 GMT");
+                        c.setRequestProperty("User-Agent",
+                            "Profile/MIDP-2.0 Configuration/CLDC-1.0");
+                        c.setRequestProperty("Content-Language", "en-US");
+
+                        // Getting the output stream may flush the headers
+                        os = c.openOutputStream();
+                        os.write("LIST games\n".getBytes());
+                        os.flush();           // Optional, getResponseCode will flush
+
+                        // Getting the response code will open the connection,
+                        // send the request, and read the HTTP response headers.
+                        // The headers are stored until requested.
+                        rc = c.getResponseCode();
+                        if (rc != HttpConnection.HTTP_OK) 
+                        {
+                            throw new IOException("HTTP response code: " + rc);
+                        }
+
+                        is = c.openInputStream();
+
+                        // Get the ContentType
+                        String type = c.getType();
+                        //processType(type);
+
+                        // Get the length and process the data
+                        int len = (int)c.getLength();
+                        if (len > 0) 
+                        {
+                             int actual = 0;
+                             int bytesread = 0 ;
+                             byte[] data = new byte[len];
+                             while ((bytesread != len) && (actual != -1)) 
+                             {
+                                actual = is.read(data, bytesread, len - bytesread);
+                                
+                                bytesread += actual;
+                             }
+                             
+                             for (int i = 0; i < data.length;i++)
+                             {
+                                serverURL += (char)data[i];
+                             }                            
+                        } 
+                        else 
+                        {
+                            int ch;
+                            while ((ch = is.read()) != -1) 
+                            {
+                                //process((byte)ch);
+                                
+                            }
+                        }
+                    } 
+                    catch (ClassCastException e) 
+                    {
+                        throw new IllegalArgumentException("Not an HTTP URL");
+                    } 
+                    finally 
+                    {
+                        if (is != null)
+                            is.close();
+                        if (os != null)
+                            os.close();
+                        if (c != null)
+                            c.close();
+                    }
+                    
+                    return serverURL;
                 }
 }
 
