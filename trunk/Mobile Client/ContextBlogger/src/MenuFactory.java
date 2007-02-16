@@ -25,13 +25,16 @@ public class MenuFactory
 	private Display					m_ownerDisplay;
 	private Hashtable				m_availableSensors;
         private ItemMenu                                m_mainMenu;
+        private ObjectIdStateListener                   m_objectIdStateListener;
+        
 	/**
 	 */
 	public MenuFactory(CampusMIDlet owner, Display ownerDisplay)
 	{
 		m_owner = owner;
 		m_ownerDisplay = ownerDisplay;
-
+                m_objectIdStateListener = new ObjectIdStateListener();
+                
 		findSensors();
 	}
 
@@ -176,12 +179,17 @@ public class MenuFactory
 		//when scan object has been chosen
 		Enumeration e = m_availableSensors.elements();                
                 int i = 0;
+                
+                //add two stateListeners to the ObjectIDState
+                State objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
+                objectIDState.addStateListener(entryMenu);
+                objectIDState.addStateListener(categoryEntryMenu);
+                
                 while (e.hasMoreElements())
 		{			
                         Sensor sensor = (Sensor)e.nextElement();
-                        sensor.setValue(CampusConstants.K_MENU_ID, "BlogFilterMenu");
-                        sensor.addStateListener(entryMenu);
-                        sensor.addStateListener(categoryEntryMenu);                                      
+                        sensor.setValue(CampusConstants.K_MENU_ID, "BlogFilterMenu");                                                              
+                        sensor.addStateListener(m_objectIdStateListener);
                         
                         StateTransitionMenu stateTransitionMenu = new StateTransitionMenu(m_ownerDisplay, sensor, true);
                         stateTransitionMenu.addMenuTransition("BlogFilterMenu", blogFilterMenu);

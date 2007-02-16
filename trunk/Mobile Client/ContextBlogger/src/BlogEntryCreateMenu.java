@@ -74,12 +74,24 @@ public class BlogEntryCreateMenu extends VisualMenu
            String body = m_bodyField.getString();
            //maybe it's a good idea to make one state for the object id, this state can be updated 
            //and queried whenever the object id is needed.           
-           String objectID = ""; 
-           String categories = "";           
+           State objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
+           String objectID = (String)objectIDState.getValue(CampusConstants.K_OBJECT_ID_KEY); 
+           String categories = "";                      
+
            //post the blog entry to the blog
            try
            {
                CampusConstants.K_BLOGGER_STUB.post(CampusConstants.K_MOBILE_ID, objectID, categories, title, body);
+               //this class adds another blog entry to the blog, therefore the list of available blog entries has to be updated.
+               //by setting the objectIDState to its current value, actually nothing changes, however setting the objectID value
+               //sparks a new stateChange, every listener will therefore informed that the object has changed and that the list
+               //of available blog entries has to be updated. This is a somewhat dirty hack that will disappear as soon as 
+               //the caching functionality is available.
+               objectIDState.setValue(CampusConstants.K_OBJECT_ID_STATE, objectID);
+               //if the post has been done, return to the parent menu! 
+               //TODO add an operation for this in the visualmenu class!
+               VisualMenu parentMenu = (VisualMenu)this.getParent();
+               this.getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
            }
            catch (java.rmi.RemoteException e)
            {

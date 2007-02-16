@@ -41,6 +41,8 @@ public class CampusMIDlet
 		 */
 		public CampusMIDlet()
 		{
+                        //get mobile identification number for user identification
+                        CampusConstants.K_MOBILE_ID = this.getMobileID();
 			m_display = Display.getDisplay(this);
 			m_menuFactory = new MenuFactory(this, m_display);
 		}
@@ -142,5 +144,11 @@ public class CampusMIDlet
 			TextBox errorBox = new TextBox("An error occurred", e.getMessage(),200, TextField.ANY);
 			m_display.setCurrent(errorBox);
 		}
+                
+                private String getMobileID()
+                {
+                    //TODO make this the Mobile Phone Identification Number
+                    return "123";
+                }
 }
 
