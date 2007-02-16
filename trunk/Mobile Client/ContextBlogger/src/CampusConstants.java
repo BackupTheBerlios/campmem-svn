@@ -37,6 +37,7 @@ public class CampusConstants
                 
 	public static final String  K_CURRENT_SENSOR				= "CURRENT_SENSOR";
 	public static final String  K_LOGIN_STATE				= "LOGIN_STATE";
+        public static final String  K_OBJECT_ID_STATE                           = "OBJECT_ID_STATE";
         public static final String  K_ENTRIES_STATE                             = "ENTRIES_STATE";
         public static final String  K_CATEGORY_FILTER_STATE                     = "CATEGORY_FILTER_STATE";
         public static final String  K_CATEGORY_FILTER_MENU_STATE                = "CATEGORY_FILTER_MENU_STATE";
