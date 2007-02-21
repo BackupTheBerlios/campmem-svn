@@ -50,13 +50,13 @@ public class SemaCodeSensor extends Sensor
                 
 		/*try
 		{
-			m_player = Manager.createPlayer("capture://video");
-                        m_player.prefetch();
+			m_player = Manager.createPlayer("capture://video");                        
+                        
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-		}  */             
+		}   */          
 	}
 
         /**
@@ -127,12 +127,15 @@ public class SemaCodeSensor extends Sensor
 
 		try
                 {
-                  m_videoControl.setVisible(false);
+                  m_videoControl.setVisible(false);          
+                 
                   //m_decodeThread.interrupt();
                   //return the player into the realised state
                   //m_player.deallocate();
                   //m_player.stop();
                   m_player.close();
+                  m_player = null;
+                  m_videoControl = null;
                 }
                 catch(Exception e)
                 {

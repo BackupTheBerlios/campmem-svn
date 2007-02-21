@@ -27,7 +27,20 @@ public class CampusConstants
 {	
         public static final String  K_MIDLET_NAME                               = "ContextBlogger";
         public static String        K_MOBILE_ID;
-        public static String        K_BERLIOS_URL                               = "http://campmem.berlios.de/ServiceURL.php";
+        public static String        K_MOBILE_DEFAULT_ID                         = "123";
+        public static String        K_BERLIOS_URL                               = "http://campmem.berlios.de/ServiceURL.php";        
+        //these are some manufacturer specific property identifiers found in forums, use to find the IMEI code, identifying
+        //the mobile device, and with that the user
+        public static final String[]      
+                                    K_IMEI_MANUFACTURER                         =   { 
+                                                                                        "com.nokia.mid.imei",       //for nokia phones
+                                                                                        "com.nokia.IMEI",           //different option for nokia phones
+                                                                                        "com.sonyericsson.IMEI",    //for sony ericsson
+                                                                                        "com.siemens.IMEI",         //for siemens phones
+                                                                                        "device.imei",              //for motorola phones
+                                                                                        "phone.imei",               //not sure if this works, but we can try
+                                                                                        "IMEI"                      //also found in forums
+                                                                                    };
         
         public static final String  K_OBJECT_ID_KEY				= "OBJECT_ID";
 	public static final String  K_SENSOR_OWNER				= "SENSOR_OWNER";

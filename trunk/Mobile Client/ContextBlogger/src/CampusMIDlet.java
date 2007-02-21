@@ -30,15 +30,15 @@ public class CampusMIDlet
 {
 		//constants
 		private final Command       K_SELECT_SENSOR = new Command("Select Sensor", Command.ITEM, 1);
-                private final String        K_MOBILE_ID_KEY = "123";
-		
+               // private final String        K_MOBILE_ID_KEY = "123";		
+                
                 //private variables
 		private Display             m_display;
 		private Sensor              m_selectedSensor;
 		private MenuFactory         m_menuFactory;
                 private State               m_blogEntryState;
                 private State               m_quitState;
-                
+                                
 		/**
 		 */
 		public CampusMIDlet()
@@ -156,10 +156,37 @@ public class CampusMIDlet
 			m_display.setCurrent(errorBox);
 		}
                 
+                /** This method will try to identify the mobile device and hence the user using it by finding the IMEI 
+                 *  International Mobile Equipment Identity code of the mobile device, using System property values 
+                 *  commonly used by manufacturers. If the IMEI number cannot be found the user is given a standard id 
+                 *  which corresponds to the standard user.
+                 *  @return if successful a unique ID identifying a mobile device and user, otherwise a standard id 
+                 *  corresponding to a general or standard user.
+                 */
                 private String getMobileID()
                 {
                     //TODO make this the Mobile Phone Identification Number
-                    return "123";
+                    //TODO use IMEI International Mobile Equipment Identity or IMSI International Mobile Subscriber Identity
+                    String imeiIdentification = "";
+                    
+                    //try to find the IMEI code of this mobile device
+                    for (int i = 0; i < CampusConstants.K_IMEI_MANUFACTURER.length; i++)
+                    {                    
+                        imeiIdentification = System.getProperty(CampusConstants.K_IMEI_MANUFACTURER[i]);
+                        //if some IMEI number is found, we stop searching
+                        if (imeiIdentification != null && !imeiIdentification.equals(""))
+                        {
+                            break;
+                        }                      
+                    }
+                    
+                    //if not found use standard identification number 
+                    if (imeiIdentification == null || imeiIdentification.equals(""))
+                    {
+                        imeiIdentification = CampusConstants.K_MOBILE_DEFAULT_ID;
+                    }
+
+                    return imeiIdentification;
                 }
                 
                 /** Gets the address from the Context Blogger Service Server, from our berlios server.
