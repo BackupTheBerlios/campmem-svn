@@ -14,14 +14,6 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * CategoryMenu.java
- *
- * Created on 16 januari 2007, 15:35
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 import javax.microedition.lcdui.*;
 import javax.xml.parsers.*;
 import org.xml.sax.helpers.DefaultHandler;
@@ -29,15 +21,17 @@ import org.xml.sax.Attributes;
 import java.util.Vector;
 import java.io.ByteArrayInputStream;
 
-/**
- *
- * @author Tim
+/** Shows all categories available in the blog.
+ *  @author Tim de Jong
  */
 public class CategoryMenu extends ItemMenu 
 {
     BlogEntryListMenu m_categoryEntryMenu;
     
-    /** Creates a new instance of CategoryMenu */
+    /**
+     *  @param ownerDisplay, the display that will be showing this menu.
+     *  @param menuTitle, the title for this categorymenu. 
+     */
     public CategoryMenu (Display ownerDisplay, String menuTitle) 
     {
         super(ownerDisplay, menuTitle);      
@@ -46,6 +40,8 @@ public class CategoryMenu extends ItemMenu
         t.run(); 
     }
     
+    /** Retrieves all categories from the server.
+     */
     private class CategoryRetrieve implements Runnable
     {        
         private ItemMenu            m_owner;
@@ -189,47 +185,5 @@ public class CategoryMenu extends ItemMenu
         {
             return m_categories.size();
         }
-    }
-}
-
-/**
- */
-class Category
-{
-    private String              m_categoryId;
-    private String              m_categoryName;
-   
-    /**
-     */
-    public Category()
-    {      
-        m_categoryId = "";
-        m_categoryName = "";
-    }
-    
-    public Category(String categoryId, String categoryName)
-    {
-        m_categoryId = categoryId;
-        m_categoryName = categoryName;
-    }
-    
-    public void setId(String categoryId)
-    {
-        m_categoryId = categoryId;
-    }
-    
-    public String getId()
-    {
-        return m_categoryId;
-    }
-    
-    public void setName(String categoryName)
-    {
-        m_categoryName = categoryName;
-    }
-    
-    public String getName()
-    {
-        return m_categoryName;
     }
 }

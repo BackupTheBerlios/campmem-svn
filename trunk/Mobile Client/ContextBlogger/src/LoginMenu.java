@@ -25,7 +25,8 @@ public class LoginMenu extends StateTransitionMenu
 	private Displayable			m_loginDisplayable;
         private String                          m_mobileID;
         private State                           m_loginState;   
-	/**
+	
+        /**
 	 */
 	public LoginMenu(Display ownerDisplay, State loginState, String mobileID)
 	{

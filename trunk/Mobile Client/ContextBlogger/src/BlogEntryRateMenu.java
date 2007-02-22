@@ -14,19 +14,11 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * BlogEntryRateMenu.java
- *
- * Created on 2 februari 2007, 14:05
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 import javax.microedition.lcdui.*;
 
-/**
- *
- * @author Tim
+/** Provides a GUI interface for rating and viewing the rating of blog entry. Rating is possible
+ *  on a scale from 0 to 5.
+ *  @author Tim
  */
 public class BlogEntryRateMenu extends VisualMenu
 {
@@ -36,7 +28,10 @@ public class BlogEntryRateMenu extends VisualMenu
     
     private final Command       K_RATE_COMMAND = new Command("Rate", Command.SCREEN, 2);
     
-    /** Creates a new instance of BlogEntryRateMenu */
+    /** Constructor
+     *  @param ownerDisplay, the display that will be displaying the menu.
+     *  @param entry, the blogentry the rating will be given for.
+     */
     public BlogEntryRateMenu(Display ownerDisplay, BlogEntry entry) 
     {
         super(ownerDisplay);
@@ -44,6 +39,9 @@ public class BlogEntryRateMenu extends VisualMenu
         buildRateForm(m_entry);
     }
     
+    /** Builds the graphical menu depending on the blog entry to be rated.
+     *  @param entry, the blog entry to be rated.
+     */
     private void buildRateForm(BlogEntry entry)
     {
         m_rateForm = new Form("Rate: " + entry.getTitle());
@@ -57,8 +55,12 @@ public class BlogEntryRateMenu extends VisualMenu
         m_rateSlider.setValue(entry.getRating());
     }
     
-     public void commandAction(Command c, Displayable d)
-     {
+    /** Overrides the method from the VisualMenu class to handle menu specific commands
+     *  @param c, the command that is carried out on the menu
+     *  @param d, the displayable that caused the command to be carried out.
+     */
+    public void commandAction(Command c, Displayable d)
+    {
         if (c == K_RATE_COMMAND)
         {
            int rating = m_rateSlider.getValue();
@@ -87,8 +89,11 @@ public class BlogEntryRateMenu extends VisualMenu
         {
             super.commandAction(c,d);
         }
-     }
+    }
      
+    /** Gets the displayable giving a graphical representation for this menu
+     *  @return the displayable representing this menu.
+     */ 
     public Displayable getDisplayable()
     {
         return m_rateForm;

@@ -17,21 +17,29 @@
 import java.util.Vector;
 import javax.microedition.lcdui.*;
 
-/**
+/** This class implements a VisualMenu that can display an item list.
+ *  @author Tim de Jong
  */
 public class ItemMenu extends VisualMenu
 {
 	private List				m_menuItemList;
 
-        /**
+        /** Constructor
+         *  @param ownerDisplay, the display showing this menu
+         *  @param menuTitle, the title of this item menu. This title will be displayed 
+         *  on top of the menu.
          */
         public ItemMenu(Display ownerDisplay, String menuTitle)
         {
             this(ownerDisplay, menuTitle, List.IMPLICIT);
         }
 	
-        /**
-	 */
+        /** Constructor
+         *  @param ownerDisplay, the display showing this menu
+         *  @param menuTitle, the title of this item menu. This title will be displayed 
+         *  on top of the menu.
+         *  @param listType, the type of list as defined in the javax.microedition.lcdui.List class.
+         */
 	public ItemMenu(Display ownerDisplay, String menuTitle, int listType)
 	{
 		super(ownerDisplay);
@@ -39,7 +47,11 @@ public class ItemMenu extends VisualMenu
 		m_menuItemList.setCommandListener(this);
 	}
 	
-        /**
+        /** Adds a submenu as a menuitem of this item menu. Each VisualMenu added to the item
+         *  menu will show up as a choice in the item menu and will be added in the menu's hierarchy
+         *  making navigation of the itemmenu to submenus possible.
+         *  @param itemName, the title the menuitem should have in the graphical menu.
+         *  @param subMenu, the VisualMenu that should be added below the itemmenu as a navigation option.
          */
         public void addMenuItem(String itemName, VisualMenu subMenu)
         {
@@ -50,7 +62,9 @@ public class ItemMenu extends VisualMenu
             addChild(subMenu);
         }
         
-	/**
+	/** Gets the menuitem located at index among the children 
+         *  @param index, the index among the children of this menu.
+         *  @return the VisualMenu that was added as a child at the index location.
 	 */
 	public VisualMenu getMenuItem(int index)
 	{
@@ -58,7 +72,8 @@ public class ItemMenu extends VisualMenu
 		return (VisualMenu) children.elementAt(index);
 	}
 
-	/**
+	/** Removes the child menuitem located at the index position.
+         *  @param index, the location of the menuitem to be removed.
 	 */
 	public void removeMenuItem(int index)
 	{
@@ -66,15 +81,8 @@ public class ItemMenu extends VisualMenu
 		//remove from data store
 		removeChild(removeMenu);
 	}
-
-        /**
-         */
-        public int getNumberOfItems()
-        {
-            return m_menuItemList.size();
-        }
         
-        /**
+        /** Removes all menuitems or children from this ItemMenu.  
          */
         public void removeAll()
         {
@@ -88,8 +96,18 @@ public class ItemMenu extends VisualMenu
             m_menuItemList.deleteAll();
         }
         
-	/**
-	 */
+        /** Returns the number of children or menuitems of this ItemMenu
+         *  @return the number of menuitems that have been added to this menu.
+         */
+        public int getNumberOfItems()
+        {
+            return m_menuItemList.size();
+        }     
+                
+	/** Overrides the method from the VisualMenu class to handle menu specific commands
+         *  @param c, the command that is carried out on the menu
+         *  @param d, the displayable that caused the command to be carried out.
+         */
 	public void commandAction(Command c, Displayable d)
 	{
 		//find out what command has spawned the action
@@ -111,7 +129,9 @@ public class ItemMenu extends VisualMenu
 		}
 	}
 
-	/**
+	/** Returns the displayable with the graphical representation of this menu
+         *  As a byproduct adds the Back command and/or Exit Command to the displayable.
+         *  @return the displayable representing this menu.
 	 */
 	public Displayable getDisplayable()
 	{

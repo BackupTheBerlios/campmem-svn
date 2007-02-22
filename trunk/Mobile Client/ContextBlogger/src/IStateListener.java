@@ -14,11 +14,16 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/**
+/** Provides the interface for all classes listening to state updates. Everytime a state is updated
+ *  the stateUpdated method will be called with the changed state as a parameter. Classes implementing
+ *  this interface are notified as soon as a state that adds them to its list of state listeners has been updated.
+ *  @author Tim de Jong
  */
 public interface IStateListener
 {
-	/**
+	/** This method will be called as soon as a state or one of the states that
+         *  has added the class implementing this interface has been updated.
+         *  @param s, the state that has been updated.
 	 */
 	public void stateUpdated(State s);
 }

@@ -17,7 +17,8 @@
 import java.util.Stack;
 import java.util.Vector;
 
-/**
+/** The Controller class is responsible for all logic between sensors and actuators on the mobile client.   
+ *  @author Tim de Jong
  */
 public abstract class Controller implements ISensorListener, Runnable
 {
@@ -25,7 +26,7 @@ public abstract class Controller implements ISensorListener, Runnable
 	private Vector				m_controllerLogic = new Vector();
 	private Vector				m_actuators = new Vector();
 
-	/**
+	/** Constructor
 	 */
 	public Controller()
 	{

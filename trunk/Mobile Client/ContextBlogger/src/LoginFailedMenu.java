@@ -14,14 +14,6 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * LoginFailedMenu.java
- *
- * Created on 16 januari 2007, 10:41
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 import javax.microedition.lcdui.*;
 /**
  *

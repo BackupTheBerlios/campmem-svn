@@ -31,7 +31,9 @@ public class BlogEntryListMenu  extends ItemMenu
         private boolean m_filterResults = false;
         private String m_objectID;
         
-        /**
+        /** Constructor for menu that shows all blog entries found.
+         *  @param ownerDisplay, the display that will display this menu.
+         *  @param menuTitle, the title for this itemmenu.
 	 */
 	public BlogEntryListMenu(Display ownerDisplay, String menuTitle)
 	{
@@ -39,7 +41,12 @@ public class BlogEntryListMenu  extends ItemMenu
                 m_filterResults = false;
 	}
        
-        /**
+        /** Constructor
+         *  @param ownerDisplay, the display that will display this menu.
+         *  @param menuTitle, the title for this itemmenu.
+         *  @param filterResults, whether the results this list shows are filtered or not.
+         *  When filterResults is true the results are filtered according to a category filter
+         *  depening on the value K_CATEGORY_FILTER_STATE has. When false, all blog entries are shown.
 	 */
 	public BlogEntryListMenu(Display ownerDisplay, String menuTitle, boolean filterResults)
 	{
@@ -47,7 +54,11 @@ public class BlogEntryListMenu  extends ItemMenu
                 m_filterResults = filterResults;
 	}
         
-        /**
+        /** Implements the method from the IStateListener interface. The BlogEntryListMenu listens to changes
+         *  of two states. First of all it listens to changes in the object id state; when changed the list has to be updated.
+         *  Also, the menu listens to changes in the K_CATEGORY_FILTER_STATE so the filter for the blog entries is updated when
+         *  it's changed.
+         *  @param s, the changed state this menu listens to.
          */
         public void stateUpdated(State s)
         {          
@@ -69,7 +80,8 @@ public class BlogEntryListMenu  extends ItemMenu
             t.run(); 
         }
         
-        /**
+        /** Retrieves information about blog entries from the server.
+         *  @author Tim de Jong
          */
         private class BlogRetrieve implements Runnable
         {
