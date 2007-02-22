@@ -14,27 +14,20 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * BlogEntryActionMenu.java
- *
- * Created on 31 januari 2007, 16:23
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
+
 import javax.microedition.lcdui.*;
 
-/**
- *
- * @author Tim
+/** The BlogEntryActionMenu is an ItemMenu that displays all possible actions that can be
+ *  carried out on a blog entry. 
+ *  @author Tim de Jong
  */
 public class BlogEntryActionMenu extends ItemMenu
 {
     private BlogEntry               m_entry;
     
     /** Creates a new instance of BlogEntryActionMenu 
-     *  @param
-     *  @param     
+     *  @param ownerDisplay, the display object that will be used to display this menu.
+     *  @param entry, the blog entry the actions should or could be carried out upon.    
      */
     public BlogEntryActionMenu (Display ownerDisplay, BlogEntry entry) 
     {
@@ -43,8 +36,8 @@ public class BlogEntryActionMenu extends ItemMenu
         buildEntryMenu(entry);
     }
     
-    /**
-     *  @param
+    /** Builds the blog entry menu, by creating an item menu with all possible actions.
+     *  @param entry, the blog entry this menu is created for.
      */
     private void buildEntryMenu(BlogEntry entry)
     {
@@ -64,16 +57,16 @@ public class BlogEntryActionMenu extends ItemMenu
         this.addMenuItem("Comment", commentMenu);
     }
     
-    /**
-     *  @return
+    /** Gets the entry this menu can carried out actions upon.     
+     *  @return the entry this menu acts on.
      */
     public BlogEntry getEntry()
     {
         return m_entry;
     }
     
-    /**
-     *  @param 
+    /** Sets the blog entry that can be acted upon by this menu.
+     *  @param entry, the blog entry the actions in this menu are meant for.
      */
     public void setEntry(BlogEntry entry)
     {

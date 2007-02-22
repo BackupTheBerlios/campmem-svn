@@ -14,15 +14,25 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/**
+
+/** Interface for logic object used by a controller. The ControllerLogic interface provides a blue print for classes that
+ *  can handle certain states and perform some logic on these states to change their values or make decisions based on 
+ *  these states.
+ *  @author Tim de Jong
  */
 public interface IControllerLogic
 {
-	/**
+	/** Returns whether the specific state s is handled by controller logic
+         *  @param s, the state that has to be handled.
+         *  @return true if the state s is handled by the subclass of this controller logic interface.
+         *  false, if the state s is not handled.
 	 */
 	public boolean isHandling(State s);
 
-	/**
+	/** Performs the logic on or depending on the state s.
+         *  @param s, the state that has to be handled by this interface's subclass.
+         *  @return a state representing the results of the logic carried out. This can be a changed state s
+         *  or a new state with values depending on the logic carried out on s.
 	 */
 	public State handle(State s);
 }

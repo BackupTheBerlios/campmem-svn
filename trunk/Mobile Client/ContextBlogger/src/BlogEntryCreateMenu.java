@@ -14,21 +14,10 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-
-/*
- * BlogEntryCreateMenu.java
- *
- * Created on 6 februari 2007, 16:15
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 import javax.microedition.lcdui.*;
 
-/**
- *
- * @author Tim
+/** The BlogEntryCreateMenu is used to create new blog entries in the blog. 
+ *  @author Tim de Jong
  */
 public class BlogEntryCreateMenu extends VisualMenu
 {
@@ -36,7 +25,8 @@ public class BlogEntryCreateMenu extends VisualMenu
     private TextField               m_titleField;
     private TextField               m_bodyField;
     
-    /** 
+    /** Constructor
+     *  @param ownerDisplay, the display object that will be used to display the menu
      */
     public BlogEntryCreateMenu(Display ownerDisplay) 
     {
@@ -44,7 +34,7 @@ public class BlogEntryCreateMenu extends VisualMenu
         createMenu();
     }
     
-    /**
+    /** Creates the menu that is used to create new blog entries.
      */
     private void createMenu()
     {
@@ -63,7 +53,9 @@ public class BlogEntryCreateMenu extends VisualMenu
         m_displayable.addCommand(CampusConstants.K_SUBMIT_COMMAND);
     }
     
-    /**
+    /** Overrides the method from the VisualMenu class to handle menu specific commands
+     *  @param c, the command that is carried out on the menu
+     *  @param d, the displayable that caused the command to be carried out.
      */
     public void	commandAction(Command c, Displayable d)
     {
@@ -104,7 +96,8 @@ public class BlogEntryCreateMenu extends VisualMenu
         }
     }
     
-    /**
+    /** Returns the displayable that provides the graphical representation of this menu
+     *  @return the displayable with the graphical representation of this menu.
      */
     public Displayable getDisplayable()
     {

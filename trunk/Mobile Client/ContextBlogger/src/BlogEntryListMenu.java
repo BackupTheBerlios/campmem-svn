@@ -21,12 +21,12 @@ import org.xml.sax.helpers.DefaultHandler;
 import org.xml.sax.Attributes;
 import java.util.Vector;
 
-/**
+/** The BlogEntryListMenu lists all or a filtered list of blog entries.
+ *  @author Tim de Jong
  */
 public class BlogEntryListMenu  extends ItemMenu
                                 implements IStateListener
-{	
-       // private State m_transitionState;
+{     
         private String m_categoryFilter = "";
         private boolean m_filterResults = false;
         private String m_objectID;
@@ -47,6 +47,8 @@ public class BlogEntryListMenu  extends ItemMenu
                 m_filterResults = filterResults;
 	}
         
+        /**
+         */
         public void stateUpdated(State s)
         {          
             State categoryFilterState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CATEGORY_FILTER_STATE);
@@ -67,7 +69,8 @@ public class BlogEntryListMenu  extends ItemMenu
             t.run(); 
         }
         
-        
+        /**
+         */
         private class BlogRetrieve implements Runnable
         {
             private String              m_objectID;

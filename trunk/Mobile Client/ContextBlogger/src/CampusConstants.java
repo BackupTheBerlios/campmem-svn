@@ -18,17 +18,19 @@
 import javax.microedition.lcdui.*;
 import blogger.*;
 
-/**
- *
- * @author Tim de Jong
- *
+/** Constant class of the ContextBlogger Mobile Client, stores all constants in one central location.
+ *  @author Tim de Jong
  */
 public class CampusConstants
 {	
+        //some standard constants for the Mobile Client
         public static final String  K_MIDLET_NAME                               = "ContextBlogger";
         public static String        K_MOBILE_ID;
         public static String        K_MOBILE_DEFAULT_ID                         = "123";
-        public static String        K_BERLIOS_URL                               = "http://campmem.berlios.de/ServiceURL.php";        
+        //url values to two services running on our berlios server
+        public static String        K_BERLIOS_SERVICE_URL                       = "http://campmem.berlios.de/ServiceURL.php";
+        public static String        K_BERLIOS_UPDATES_URL                       = "";
+        public static String        K_BERLIOS_VERSION_URL                       = K_BERLIOS_UPDATES_URL + "?version=true";
         //these are some manufacturer specific property identifiers found in forums, use to find the IMEI code, identifying
         //the mobile device, and with that the user
         public static final String[]      

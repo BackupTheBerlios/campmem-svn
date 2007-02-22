@@ -17,6 +17,8 @@ public interface BloggerSEI extends java.rmi.Remote {
 
 	public java.lang.String postMedia(java.lang.String string_1) throws java.rmi.RemoteException;
 
+	public java.lang.String registerUser(java.lang.String string_1, java.lang.String string_2, java.lang.String string_3) throws java.rmi.RemoteException;
+
 	public java.lang.String retreive_blog(java.lang.String string_1, java.lang.String string_2) throws java.rmi.RemoteException;
 
 	public java.lang.String retrieve_blogList(java.lang.String string_1, java.lang.String string_2) throws java.rmi.RemoteException;

@@ -14,29 +14,20 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * BlogEntryCommentMenu.java
- *
- * Created on 2 februari 2007, 11:16
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
-
 import javax.microedition.lcdui.*;
 
-/**
- *
- * @author Tim
+/** A BlogEntryCommentMenu is a menu that is used to create and post user comments or annotations to blog entries.
+ *  @author Tim de Jong
  */
 public class BlogEntryCommentMenu extends VisualMenu
 {
     private TextBox m_commentTextBox;
-    private BlogEntry m_entry;
-    
-    
-    
-    /** Creates a new instance of BlogEntryCommentMenu */
+    private BlogEntry m_entry;  
+        
+    /** Constructor
+     *  @param ownerDisplay, the display that will be used to display this menu.
+     *  @param entry, the blog entry this menu creates and posts the comments for.
+     */
     public BlogEntryCommentMenu(Display ownerDisplay, BlogEntry entry) 
     {
         super(ownerDisplay);
@@ -44,6 +35,9 @@ public class BlogEntryCommentMenu extends VisualMenu
         buildCommentMenu(entry);
     }
     
+    /** Builds the comment menu graphical representation.
+     *  @param entry, the blog entry this menu will provide comments for. 
+     */
     private void buildCommentMenu(BlogEntry entry)
     {
         m_commentTextBox = new TextBox("Comment: " + entry.getTitle(),"",255, TextField.ANY);
@@ -52,6 +46,10 @@ public class BlogEntryCommentMenu extends VisualMenu
         m_commentTextBox.addCommand(CampusConstants.K_SUBMIT_COMMAND);        
     }
     
+    /** Overrides the method from the VisualMenu class to handle menu specific commands
+     *  @param c, the command that is carried out on the menu
+     *  @param d, the displayable that caused the command to be carried out.
+     */
     public void	commandAction(Command c, Displayable d)
     {
         if (c == CampusConstants.K_SUBMIT_COMMAND)
@@ -81,6 +79,10 @@ public class BlogEntryCommentMenu extends VisualMenu
         }
     }
     
+    /** Returns the displayable for this menu. The displayable is a graphic representation of this menu. Also this method has
+     *  a side effect, it clears the textbox of this comment menu before the displayable is returned.
+     *  @return the displayable that is a graphic representation of the menu.
+     */ 
     public Displayable getDisplayable()
     {
         //clear textbox before showing it

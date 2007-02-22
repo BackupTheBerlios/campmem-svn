@@ -17,7 +17,7 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 
 	public BloggerSEI_Stub() {
 		_propertyNames = new String[] {ENDPOINT_ADDRESS_PROPERTY};
-		_propertyValues = new Object[] {"http://192.168.0.122:8080/CM1/Blogger"};
+		_propertyValues = new Object[] {"http://LAPTOPTJO:8080/CM1/Blogger"};
 	}
 
 	public void _setProperty(String name, Object value) {
@@ -229,6 +229,34 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 		return result;
 	}
 
+	public java.lang.String registerUser(java.lang.String string_1, java.lang.String string_2, java.lang.String string_3) throws java.rmi.RemoteException {
+		// Copy the incoming values into an Object array if needed.
+		Object[] inputObject = new Object[3];
+		inputObject[0] = string_1;
+		inputObject[1] = string_2;
+		inputObject[2] = string_3;
+
+		Operation op = Operation.newInstance(_qname_wsdl_registerUser, _type_registerUser, _type_registerUserResponse);
+		_prepOperation(op);
+		op.setProperty(Operation.SOAPACTION_URI_PROPERTY, "");
+		Object resultObj;
+		try {
+			resultObj = op.invoke(inputObject);
+		} catch (JAXRPCException e) {
+			Throwable cause = e.getLinkedCause();
+			if (cause instanceof java.rmi.RemoteException) {
+				throw (java.rmi.RemoteException) cause;
+			}
+			throw e;
+		}
+		java.lang.String result;
+		// Convert the result into the right Java type.
+		// Unwrapped return value
+		Object resultObj2 = ((Object[])resultObj)[0];
+		result = (java.lang.String)resultObj2;
+		return result;
+	}
+
 	public java.lang.String retreive_blog(java.lang.String string_1, java.lang.String string_2) throws java.rmi.RemoteException {
 		// Copy the incoming values into an Object array if needed.
 		Object[] inputObject = new Object[2];
@@ -334,6 +362,8 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 	protected static final QName _qname_postCommentResponse = new QName("urn:Blogger/types", "postCommentResponse");
 	protected static final QName _qname_postMedia = new QName("urn:Blogger/types", "postMedia");
 	protected static final QName _qname_postMediaResponse = new QName("urn:Blogger/types", "postMediaResponse");
+	protected static final QName _qname_registerUser = new QName("urn:Blogger/types", "registerUser");
+	protected static final QName _qname_registerUserResponse = new QName("urn:Blogger/types", "registerUserResponse");
 	protected static final QName _qname_retreive_blog = new QName("urn:Blogger/types", "retreive_blog");
 	protected static final QName _qname_retreive_blogResponse = new QName("urn:Blogger/types", "retreive_blogResponse");
 	protected static final QName _qname_retrieve_blogList = new QName("urn:Blogger/types", "retrieve_blogList");
@@ -346,6 +376,7 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 	protected static final QName _qname_wsdl_getRating = new QName("urn:Blogger/wsdl", "getRating");
 	protected static final QName _qname_wsdl_postComment = new QName("urn:Blogger/wsdl", "postComment");
 	protected static final QName _qname_wsdl_postMedia = new QName("urn:Blogger/wsdl", "postMedia");
+	protected static final QName _qname_wsdl_registerUser = new QName("urn:Blogger/wsdl", "registerUser");
 	protected static final QName _qname_wsdl_retreive_blog = new QName("urn:Blogger/wsdl", "retreive_blog");
 	protected static final QName _qname_wsdl_retrieve_blogList = new QName("urn:Blogger/wsdl", "retrieve_blogList");
 	protected static final QName _qname_wsdl_setRating = new QName("urn:Blogger/wsdl", "setRating");
@@ -361,6 +392,8 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 	protected static final Element _type_postCommentResponse;
 	protected static final Element _type_postMedia;
 	protected static final Element _type_postMediaResponse;
+	protected static final Element _type_registerUser;
+	protected static final Element _type_registerUserResponse;
 	protected static final Element _type_retreive_blog;
 	protected static final Element _type_retreive_blogResponse;
 	protected static final Element _type_retrieve_blogList;
@@ -421,6 +454,8 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 		_type_postCommentResponse = new Element(_qname_postCommentResponse, _complexType_postResponse);
 		_type_postMedia = new Element(_qname_postMedia, _complexType_login);
 		_type_postMediaResponse = new Element(_qname_postMediaResponse, _complexType_postResponse);
+		_type_registerUser = new Element(_qname_registerUser, _complexType_getRating);
+		_type_registerUserResponse = new Element(_qname_registerUserResponse, _complexType_postResponse);
 		ComplexType _complexType_retreive_blog;
 		_complexType_retreive_blog = new ComplexType();
 		_complexType_retreive_blog.elements = new Element[2];

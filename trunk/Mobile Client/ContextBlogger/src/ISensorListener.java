@@ -16,18 +16,21 @@
  *  IN THE SOFTWARE.
  */
 
-/**
- * @author Tim
- *
+/** Provides an interface for class listening to sensor state updates. Also these classes should handle the errors
+ *  that can be caused by the sensors.
+ *  @author Tim de Jong
  */
 public interface ISensorListener extends IStateListener
 {
-	/**
-		Inherited from IStateListener.
+	/** Called when the state representing the sensor values has been changed.
+         *  Inherited from IStateListener.
+         *  @param s, the sensor state that has been changed.  
 	 */
 	public void stateUpdated(State s);
 
-	/**
+	/** Called when an exception occurred during the sensor operation. The subclass should
+         *  handle the sensorException or throw it through to a class that can handle it
+         *  @param e, the exception that has been throwed by the sensor.
 	 */
 	public void sensorError(Exception e);
 }

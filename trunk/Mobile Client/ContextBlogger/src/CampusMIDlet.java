@@ -22,15 +22,15 @@ import javax.microedition.midlet.*;
 import javax.microedition.lcdui.*;
 import javax.microedition.io.*;
 
-/**
+/** Main class for the ContextBlogger Mobile Client.
+ *  @author Tim de Jong
  */
 public class CampusMIDlet
 				extends MIDlet
 				implements CommandListener, ISensorListener
 {
 		//constants
-		private final Command       K_SELECT_SENSOR = new Command("Select Sensor", Command.ITEM, 1);
-               // private final String        K_MOBILE_ID_KEY = "123";		
+		private final Command       K_SELECT_SENSOR = new Command("Select Sensor", Command.ITEM, 1);               
                 
                 //private variables
 		private Display             m_display;
@@ -39,7 +39,7 @@ public class CampusMIDlet
                 private State               m_blogEntryState;
                 private State               m_quitState;
                                 
-		/**
+		/** Constructor
 		 */
 		public CampusMIDlet()
 		{
@@ -49,19 +49,28 @@ public class CampusMIDlet
 			m_menuFactory = new MenuFactory(this, m_display);
 		}
 
-		/**
+		/** This method will be called at startup. It first checks the location of the ContextBlogger service
+                 *  server. After that it checks the server for new updates. If updates are available the user is
+                 *  asked whether to install them. The login process, that starts the GUI, is started afterwards.
 		 */
 		public void startApp()
 		{            
                     try
                     {
+                        //check where the context blogger service is located
                         String serverURL = getServerURL();                        
                         System.out.println(serverURL);
+                        //check for updates
+                        if (checkForUpdates())
+                        {
+                            String updateURL = getUpdateURL();
+                        }
                     }
                     catch(IOException e)
                     {
                         e.printStackTrace();
-                    }
+                    }                    
+                    //if there are updates add update menu in front of login menu
                     
                     LoginMenu loginMenu = m_menuFactory.buildLoginMenu();
                     m_display.setCurrent(loginMenu.getDisplayable());
@@ -80,13 +89,13 @@ public class CampusMIDlet
 		{
 		}
 
-		/**
+		/** 
 		 */
 		public void destroyApp(boolean unconditional)
 		{
 		}
 
-		/**
+		/** Called when the application has to quit.
 		 */
 		public void quit()
 		{
@@ -94,7 +103,7 @@ public class CampusMIDlet
 			notifyDestroyed();
 		}
 
-		/**
+		/** 
 		 */
 		public void commandAction(Command c, Displayable s)
 		{
@@ -148,12 +157,15 @@ public class CampusMIDlet
                         }
 		}
 
-		/**
+		/** Called when a sensor error occurs. This method is a central place to handle all exceptions caused
+                 *  by exceptions. A standard error dialog will be displayed afterwards.
+                 *  @param e, the exception that was thrown by the sensor and gives an indication of what kind of error
+                 *  occured.
 		 */
 		public void sensorError(Exception e)
 		{
-			TextBox errorBox = new TextBox("An error occurred", e.getMessage(),200, TextField.ANY);
-			m_display.setCurrent(errorBox);
+			WarningMenu sensorErrorMenu = new WarningMenu(m_display, e.getMessage(), false);                        
+			m_display.setCurrent(sensorErrorMenu.getDisplayable());
 		}
                 
                 /** This method will try to identify the mobile device and hence the user using it by finding the IMEI 
@@ -189,15 +201,10 @@ public class CampusMIDlet
                     return imeiIdentification;
                 }
                 
-                /** Gets the address from the Context Blogger Service Server, from our berlios server.
-                 *  The Context Blogger Service Server can migrate over time, while the berlios server
-                 *  will most probably not. Therefore, we decided to query the berlios server for the 
-                 *  address of the Context Blogger Service Server and connect to that address afterwards.
-                 */
-                private String getServerURL() throws IOException
-                {                    
-                    String serverURL  = "";
-                     
+                private String readScriptOutput(String scriptUrl) throws IOException
+                {
+                    String scriptOutput = "";
+                    
                     HttpConnection c = null;
                     InputStream is = null;
                     OutputStream os = null;
@@ -205,7 +212,7 @@ public class CampusMIDlet
 
                     try 
                     {
-                        c = (HttpConnection)Connector.open(CampusConstants.K_BERLIOS_URL);
+                        c = (HttpConnection)Connector.open(scriptUrl);
 
                         // Set the request method and headers
                         c.setRequestMethod(HttpConnection.POST);
@@ -251,7 +258,7 @@ public class CampusMIDlet
                              
                              for (int i = 0; i < data.length;i++)
                              {
-                                serverURL += (char)data[i];
+                                scriptOutput += (char)data[i];
                              }                            
                         } 
                         else 
@@ -277,8 +284,43 @@ public class CampusMIDlet
                         if (c != null)
                             c.close();
                     }
-                    
+                    return scriptOutput;
+                }
+                
+                /** Gets the address from the Context Blogger Service Server, from our berlios server.
+                 *  The Context Blogger Service Server can migrate over time, while the berlios server
+                 *  will most probably not. Therefore, we decided to query the berlios server for the 
+                 *  address of the Context Blogger Service Server and connect to that address afterwards.
+                 */
+                private String getServerURL() throws IOException
+                {                    
+                    String serverURL = readScriptOutput(CampusConstants.K_BERLIOS_SERVICE_URL);                                               
                     return serverURL;
+                }
+                
+                /** This method opens a php file on our berlios webservice to find out if there are new updates
+                 *  for the ContextBlogger software. If there are it asks the user whether the new MIDlet should
+                 *  be downloaded and installed. The url for the download of the software is also acquired via the
+                 *  php file.
+                 */
+                private boolean checkForUpdates() throws IOException
+                { 
+                    String versionAvailable = readScriptOutput(CampusConstants.K_BERLIOS_VERSION_URL);
+                    //check midlet version property
+                    
+                    //compare it to the version returned by the berlios service
+                    
+                    //if the version is newer an update is needed
+                    return false;
+                }
+                
+                /** Returns the url where the newest version of the ContextBlogger mobile client can be found and downloaded.
+                 *  @return the url of the newest version of the ContextBlogger mobile client.
+                 */
+                private String getUpdateURL() throws IOException
+                {
+                    String updateURL = readScriptOutput(CampusConstants.K_BERLIOS_UPDATES_URL);
+                    return updateURL;
                 }
 }
 
