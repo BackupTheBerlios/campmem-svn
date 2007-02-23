@@ -17,7 +17,9 @@
 import javax.microedition.lcdui.*;
 import javax.microedition.lcdui.game.*;
 
-/**
+/** The LoginMenu class provides a first StateTransitionMenu which depending on the login process to the
+ *  ContextBlogger service carries out a couple of actions.
+ *  @author Tim de Jong
  */
 public class LoginMenu extends StateTransitionMenu
 {
@@ -26,7 +28,10 @@ public class LoginMenu extends StateTransitionMenu
         private String                          m_mobileID;
         private State                           m_loginState;   
 	
-        /**
+        /** Constructor
+         *  @param ownerDisplay, the display that will display this menu.
+         *  @param loginState, the state that represents the login progress.
+         *  @param mobileID, the mobile client ID, in this case the IMEI unique device identifier.
 	 */
 	public LoginMenu(Display ownerDisplay, State loginState, String mobileID)
 	{
@@ -36,7 +41,7 @@ public class LoginMenu extends StateTransitionMenu
 		m_loginDisplayable = new LoginCanvas();                
 	}
 
-	/**
+	/** Method that starts the login process.
 	 */
 	public void startLogin()
 	{
@@ -66,19 +71,23 @@ System.out.println("login failed " + e.toString());
                 }                
 	}
 
-	/**
+	/** Gets the displayable that is a graphical representation for this LoginMenu.
+         *  @return the displayable with the graphical representation of the view.
 	 */
 	public Displayable getDisplayable()
 	{		
                 return m_loginDisplayable;
 	}
 
+        /** Inner class that will draw the login screen.
+         *  @author Tim de Jong
+         */    
 	private class LoginCanvas extends GameCanvas
 	{		
 		//private variables
 		private String			m_loginStatus = CampusConstants.K_INIT_LOGIN;
 
-		/**
+		/** Constructor
 		 */
 		public LoginCanvas()
 		{
@@ -86,14 +95,16 @@ System.out.println("login failed " + e.toString());
                     setFullScreenMode(true);
 		}
 
-		/**
+		/** Sets the login status to the value represented by the method parameter.
+                 *  @param loginStatus, the current login status
 		 */
 		public void setLoginStatus(String loginStatus)
 		{
 			m_loginStatus = loginStatus;
 		}
 
-		/**
+		/** Gets the login status set for this LoginCanvas.
+                 *  @return the login status
 		 */
 		public String getLoginStatus()
 		{
@@ -106,7 +117,8 @@ System.out.println("login failed " + e.toString());
 		{
 		}
 
-		/**
+		/** Draws the LoginCanvas, depending on the current login status.
+                 *  @param g, the graphics object used for all drawing primitives.
 		 */
 		public void paint(Graphics g)
 		{

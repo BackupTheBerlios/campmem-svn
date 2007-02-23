@@ -15,48 +15,54 @@
  *  IN THE SOFTWARE.
  */
 import java.util.Vector;
-/**
+
+/** Class representing a menu hierarchy that consists of one root menu and several children menus; each of these children
+ *  menus can have a menu hierarchy of its own attached to it. The Menu class offers some standard hierarchy related methods
+ *  to its subclasses.
+ *  @author Tim de Jong
  */
 public class Menu
 {
 	private Menu					m_parent;
 	private Vector					m_children = new Vector();
 
-	/**
+	/** Default Constructor
+         *  The Default Constructor creates a Menu object with no parent. Therefore it constructs a menu at the highest 
+         *  level, ie. one with a root node
 	 */
 	public Menu()
 	{
 		this(null);
 	}
 
-	/**	Constructor
-
-		@param
-		@param
+	/** Constructor
+         *  Creates a menu hierarchy that has a specific parent menu. This constructor is meant to be used to
+         *  construct a menu hierarchy at a lower level.
+         *  @param parent, a parent menu node for this part of the menu hierarchy.		
 	 */
 	public Menu(Menu parent)
 	{
 		m_parent = parent;
 	}
 
-	/**
-		@param
+	/** Sets the parent menu node for this menu.
+         *  @param parent, the parent menu node for this menu.
 	 */
 	public void setParent(Menu parent)
 	{
 		m_parent = parent;
 	}
 
-	/**
-		@return
+	/** Gets the parent menu node for this menu.
+         *  @return the parent menu node for this menu.
 	 */
 	public Menu getParent()
 	{
 		return m_parent;
 	}
 
-	/**
-		@param
+	/** Adds a child menu to this menu's collection of children.
+         *  @param child, a child menu to be added.
 	 */
 	public void addChild(Menu child)
 	{
@@ -64,33 +70,39 @@ public class Menu
 		child.setParent(this);
 	}
 
-	/**
-		@param
-		@return
+	/** Removes a child from this menu's child collection and with it
+         *  a menu hierarchy below that child node 
+         *  @param child, the child to be deleted.
+         *  @return true if the removal was successfull, false otherwise.
 	 */
 	public boolean removeChild(Menu child)
 	{
 		return m_children.removeElement(child);
 	}
 
-	/**
-		@return
+	/** Gets the entire collection of children of this menu.
+         *  @return the collection of children directly connected to this menu node.
 	 */
 	public Vector getChildren()
 	{
 		return m_children;
 	}
 
-	/**
-		@param
+	/** Sets an entire collection of children for this menu.
+         *  @param children, a new collection of children for this menu.
+         *  Note: if there was an old collection of children before calling this
+         *  operation it will be deleted!
 	 */
 	public void setChildren(Vector children)
 	{
 		m_children = children;
 	}
 
-	/**
-		@return
+	/** Returns whether this Menu is the root node. The root node is found
+         *  by checking whether its parent node is non-existent (equal to null).
+         *  In a menu hierarchy built correctly only the root node should have no
+         *  parent.
+         *  @return true, if this menu is the root node, false otherwise.
 	 */
 	public boolean isRoot()
 	{

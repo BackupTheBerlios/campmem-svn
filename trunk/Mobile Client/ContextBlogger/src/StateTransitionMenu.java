@@ -17,7 +17,9 @@
 import javax.microedition.lcdui.*;
 import java.util.Hashtable;
 
-/**
+/** A StateTransitionMenu transfers command to one of its submenus depending on
+ *  the K_MENU_ID property value of the state it's a StateListener for.
+ *  @author Tim de Jong
  */
 public class StateTransitionMenu	extends VisualMenu
 					implements IStateListener
@@ -27,7 +29,15 @@ public class StateTransitionMenu	extends VisualMenu
 	private Hashtable			m_menuTable = new Hashtable();
 	private boolean				m_active = false;
 
-	/**
+	/** Constructor
+         *  @param ownerDisplay, the display that will display this menu.
+         *  @param transitionState, the state that will be listened to for changes.
+         *  Depending on the changes of the state the controls are transfered to
+         *  different child menus.
+         *  @param active, indicates whether the menu is active or not. When true,
+         *  the menu is active and transfers control automatically to a child menu
+         *  when the transitionState is changed. If false the control is not automatically
+         *  transfered.
 	 */
 	public StateTransitionMenu(Display ownerDisplay, State transitionState, boolean active)
 	{
@@ -37,7 +47,16 @@ public class StateTransitionMenu	extends VisualMenu
 		m_active = active;
 	}
 
-        /**
+        /** Adds a possible transition to a child menu to the StateTransitionMenu.
+         *  The menuIdentifier the child menu is added under will be used to
+         *  check against the K_MENU_ID property of the transition state; if the
+         *  K_MENU_ID property is equal to one of the menuIdentifier, control is 
+         *  transfered to the menu under that menuIdentifier.
+         *  @param menuIdentifier, a unique identifier for the child menu to be
+         *  added. The menuIdentifier will be used to find out what menu to 
+         *  transfer control to.
+         *  @param menu, the VisualMenu to be added as a possible transition of 
+         *  this transition menu.
          */
 	public void addMenuTransition(String menuIdentifier, VisualMenu menu)
 	{
@@ -46,7 +65,11 @@ public class StateTransitionMenu	extends VisualMenu
 		addChild(menu);
 	}
 
-        /**
+        /** Listens to changes in the stateTransition State this menu listens to.
+         *  When the State changes menu is transfered to the menu that has a 
+         *  menuIdentifier equal to the value of the K_MENU_ID property of the
+         *  stateTransition State.
+         *  @param s, the state that has been changed.
          */
 	public void stateUpdated(State s)
 	{
@@ -69,7 +92,9 @@ public class StateTransitionMenu	extends VisualMenu
 		}
 	}
 
-        /**
+        /** Returns the displayable of the menu the control has been transfered to.
+         *  @return the displayable giving the graphical representation of the menu
+         *  control has been transfered to.
          */
 	public Displayable getDisplayable()
 	{

@@ -16,23 +16,28 @@
  */
 import javax.microedition.lcdui.*;
 
-/**
+/** Abstract superclass for a Menu hierarchy that will be represented in the GUI.
+ *  @author Tim de Jong
  */
-public abstract class VisualMenu 	extends Menu
-									implements CommandListener
+public abstract class VisualMenu    extends Menu
+                                    implements CommandListener
 {
 	private Display				m_ownerDisplay;
         private boolean                         m_backCommand;
         private boolean                         m_quitCommand;
         
-	/**
+	/** Constructor
+         *  @param ownerDisplay, the display that will be used to show this visual menu.
 	 */
 	public VisualMenu(Display ownerDisplay)
 	{
 		this(ownerDisplay, true, false);
 	}
 
-	/**
+	/** Constructor
+         *  @param ownerDisplay, the display that will be used to show this visual menu.
+         *  @param backCommand, if true a back command will be added to the menu. 
+         *  @param quitCommand, if true a quit command will be added to the menu.
 	 */
 	public VisualMenu(Display ownerDisplay, boolean backCommand, boolean quitCommand)
 	{
@@ -42,7 +47,8 @@ public abstract class VisualMenu 	extends Menu
                 m_quitCommand = quitCommand;
 	}
 
-	/**
+	/** Returns the display used to show the visual menu.
+         *  @return the display used to show the visual menu.
 	 */
 	protected Display getOwnerDisplay()
 	{
@@ -63,8 +69,14 @@ public abstract class VisualMenu 	extends Menu
 		}
 	}
 
-	/**
-	 */
+       /** Implements the method from the CommandListener interface to handle
+        *  the back and exit commands in a unified way for all subclasses. 
+        *  Subclasses can override this method to handle more commands, but for
+        *  the back and exit commands they should call this method to handle these
+        *  commands.
+        *  @param c, the command that is carried out on the menu
+        *  @param d, the displayable that caused the command to be carried out.
+        */
 	public void commandAction(Command c, Displayable d)
 	{
 		if (c == CampusConstants.K_BACK_COMMAND)
@@ -100,35 +112,45 @@ public abstract class VisualMenu 	extends Menu
 		}
 	}
         
-        /**
+        /** Sets whether the back command should be available.
+         *  @param available, true if a back command should be added to the menu,
+         *  false otherwise.
          */
         public void setBackCommandAvailable(boolean available)
         {
             m_backCommand = available;
         }
         
-        /**
+        /** Returns a boolean value that indicates whether this menu has a back 
+         *  command or not.
+         *  @return true if the menu has a back command, false otherwise.
          */
         public boolean getBackCommandAvailable()
         {
             return m_backCommand;
         }
         
-        /**
+        /** Sets whether the quit command should be available.
+         *  @param available, true if a quit command should be added to the menu,
+         *  false otherwise.
          */
         public void setQuitCommandAvailable(boolean available)
         {            
             m_quitCommand = available;
         }
         
-        /**
+        /** Returns a boolean value that indicates whether this menu has a quit 
+         *  command or not.
+         *  @return true if the menu has a quit command, false otherwise.
          */
         public boolean getQuitCommandAvailable()
         {
             return m_quitCommand;
         }
         
-	/**
-	 */
+	/** Subclasses should override this method to return the displayable giving 
+         *  a graphical representation for this menu.
+         *  @return the displayable representing this menu.
+         */ 
 	public abstract Displayable getDisplayable();
 }

@@ -14,30 +14,30 @@
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-/*
- * ObjectIdStateListener.java
- *
- * Created on 16 februari 2007, 11:06
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Tim
+/** A StateListener that should be attached to States that change the current object id value.
+ *  This StateListener is attached to sensors that find the current object id. When the state
+ *  representing the sensor value has changed, this StateListener makes sure the value of the
+ *  K_OBJECT_ID_STATE is synchronised, so it always represents the object id of the object that
+ *  was scanned the last. 
+ *  @author Tim
  */
 public class ObjectIdStateListener implements IStateListener
 {
     private State m_objectIDState;
     
-    /** Creates a new instance of ObjectIdStateListener 
+    /** Constructor
+     *  Gets the K_OBJECT_ID state that has to be updated by each change event this StateListener 
+     *  listens to. 
      */
     public ObjectIdStateListener() 
     {
         m_objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
     }
     
+    /** Called whenever a State this StateListener is attached to has been changed.
+     *  @param s, the State which value has changed.
+     */
     public void stateUpdated(State s)
     {
         //update the objectID state to the current

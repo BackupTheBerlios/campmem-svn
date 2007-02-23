@@ -17,7 +17,10 @@
 import java.util.*;
 import javax.microedition.lcdui.*;
 
-/**
+/** This class creates the entire VisualMenu hierarchy for the Context Blogger Mobile Client.
+ *  By calling the buildLoginMenu function a root menu with an entire navigable menu hierarchy 
+ *  beneath it will be created.
+ *  @author Tim de Jong
  */
 public class MenuFactory
 {
@@ -27,7 +30,9 @@ public class MenuFactory
         private ItemMenu                                m_mainMenu;
         private ObjectIdStateListener                   m_objectIdStateListener;
         
-	/**
+	/** Constructor
+         *  @param owner, the MIDLet that owns this menu factory.
+         *  @param ownerDisplay, the display that is used to show all VisualMenus in the hierarchy.
 	 */
 	public MenuFactory(CampusMIDlet owner, Display ownerDisplay)
 	{
@@ -38,21 +43,26 @@ public class MenuFactory
 		findSensors();
 	}
 
-	/**
+	/** Sets the owner display for this menu factory.
+         *  @param ownerDisplay, the display that is used to show all VisualMenus in the hierarchy.
 	 */
-	public void setOwner(Display ownerDisplay)
+	public void setOwnerDisplay(Display ownerDisplay)
 	{
 		m_ownerDisplay = ownerDisplay;
 	}
 
-	/**
+	/** Gets the Display that is used to display all VisualMenus in the hierarchy.
+         *  @return the owner display.
 	 */
 	public Display getOwnerDisplay()
 	{
 		return m_ownerDisplay;
 	}
 
-	/**
+	/** Builds the root menu, the login menu, with all its submenus by calling private
+         *  function that construct the hierachy.  
+         *  @return the LoginMenu which is the root menu in the hierarchy and the first
+         *  menu that will be shown on screen.
 	 */
 	public LoginMenu buildLoginMenu()
 	{

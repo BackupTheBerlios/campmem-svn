@@ -18,21 +18,39 @@ import java.util.Hashtable;
 import java.util.Enumeration;
 import javax.microedition.lcdui.*;
 
-/**
+/** A StateChangeMenu changes the property values of a State according to some
+ *  StateChanges that have been added to it. The StateChanges take place at the 
+ *  moment the menu is chosen. A StateChangeMenu doesn't have a graphical 
+ *  representation.
+ *  @author Tim de Jong
  */
 public class StateChangeMenu extends VisualMenu
 {
 	private State				m_menuState;
 	private Hashtable			m_stateChanges = new Hashtable();
 
-	/**
+	/** Constructor.
+         *  @param ownerDisplay, the display that is used to display this menu.
+         *  Note: this is only needed for the VisualMenu this menu inherits from,
+         *  the menu itself does not have a graphical representation and therefore
+         *  does not need a display.
+         *  @param state, the state that should be changed when this menu has been
+         *  chosen.   
 	 */
 	public StateChangeMenu(Display ownerDisplay, State state)
 	{
 		this(ownerDisplay, state, true);
 	}
 
-	/**
+	/** Constructor.
+         *  @param ownerDisplay, the display that is used to display this menu.
+         *  Note: this is only needed for the VisualMenu this menu inherits from,
+         *  the menu itself does not have a graphical representation and therefore
+         *  does not need a display.
+         *  @param state, the state that should be changed when this menu has been
+         *  chosen.
+         *  @param backCommand, indicates whether a backcommand should be added to the menu.
+         *  If true a backcommand is added to the menu, if false no command will be added.   
 	 */
 	public StateChangeMenu(Display ownerDisplay, State state, boolean backcommand)
 	{
@@ -40,21 +58,31 @@ public class StateChangeMenu extends VisualMenu
 		m_menuState = state;
 	}
 
-	/**
+	/** Adds a state change to this menu. A state change can change one 
+         *  property of a state. The property to change is given by the valueField
+         *  parameter of this method. The new value this property should be given
+         *  is given by newValue.
+         *  @param valueField, the name of the state property to change.
+         *  @param newValue, the new value for the property.
 	 */
 	public void addStateChange(String valueField, Object newValue)
 	{
 		m_stateChanges.put(valueField, newValue);
 	}
 
-	/**
+	/** Removes a state change that should change the property indicated by
+         *  the valueField parameter.
+         *  @param valueField, the name of the property that was effected by the
+         *  state change and for which this state change should be removed.
+         *  @return the new value that was attached to this state change.
 	 */
 	public Object removeStateChange(String valueField)
 	{
 		return m_stateChanges.remove(valueField);
 	}
 
-	/**
+	/** Changes the State by applying all state changes that have been added
+         *  to this menu.
 	 */
 	public void changeState()
 	{
@@ -70,7 +98,10 @@ public class StateChangeMenu extends VisualMenu
 		}
 	}
 
-	/**
+	/** Because the StateChangeMenu has no graphical representation this method
+         *  doesn't return a displayable, but null. However, when this method is called,
+         *  ie. when the menu has been selected, the state changes are carried out.
+         *  @return null, a StateChangeMenu has no visual representation.
 	 */
 	public Displayable getDisplayable()
 	{

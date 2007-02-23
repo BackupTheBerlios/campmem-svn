@@ -17,7 +17,10 @@
 import java.util.Hashtable;
 import java.util.Vector;
 
-/** Represents a complex state variable.
+/** Represents a complex state variable, that can contain a multiple values and 
+ *  to which StateListeners can be added. These StateListeners are informed every
+ *  time the State values change.
+ *  @author Tim de Jong
  */
 public class State
 {
@@ -25,21 +28,26 @@ public class State
 	private Hashtable			m_values = new Hashtable();
 	private Vector				m_listeners = new Vector();
 
-	/**
+	/** Constructor.
+         *  @param stateName, a unique name describing the state.
 	 */
 	public State(String stateName)
 	{
 		m_stateName = stateName;
 	}
 
-	/**
+	/** Returns the name of this state.
+         *  @return a unique name specific to this state.
 	 */
 	public String getStateName()
 	{
 		return m_stateName;
 	}
 
-	/**
+	/** Sets a key-value pair describing a property of this state.
+         *  @param valueKey, the key describing the property, ie. the name of 
+         *  the property to be set.
+         *  @param value, the value of the property to be set.
 	 */
 	public void setValue(String valueKey, Object value)
 	{
@@ -47,7 +55,8 @@ public class State
 		notifyUpdate();
 	}
 
-	/**
+	/** Removes a key-value pair describing a property of this state.
+         *  @param valueKey, the key describing the property to be deleted.
 	 */
 	public void removeValue(String valueKey)
 	{
@@ -55,35 +64,54 @@ public class State
 		notifyUpdate();
 	}
 
-	/**
+	/** Gets a value of a certain property indicated by valueKey.
+         *  @param valueKey, the name of the property to get the value from.
+         *  @return the value of the property with the name given by valueKey.
 	 */
 	public Object getValue(String valueKey)
 	{
 		return m_values.get(valueKey);
 	}
 
-	/**
+	/** Clears all data in this state, ie. deletes all key-value property
+         *  pairs withing this state.
 	 */
 	public void clearAllData()
 	{
 		m_values.clear();
+                notifyUpdate();
 	}
 
-	/**
+	/** Adds a StateListener to this State that will be informed about each
+         *  update that is made to this state.
+         *  @param listener, an object implementing the IStateListener that will
+         *  be added to this state to be informed about all updates.
 	 */
 	public void addStateListener(IStateListener listener)
 	{
 		m_listeners.addElement(listener);
 	}
 
-	/**
+	/** Removes a StateListener from this State. The StateListener will not
+         *  be informed about any State updates afterwards.
+         *  @param the listener object to be deleted.
 	 */
 	public boolean removeStateListener(IStateListener listener)
 	{
 		return m_listeners.removeElement(listener);
 	}
-
-	/**
+        
+        /** Gets the list of all StateListeners that will be informed about State
+         *  changes.
+         *  @return a vector with all StateListeners.
+         */
+        protected Vector getStateListeners()
+        {
+            return m_listeners;
+        }
+        
+	/** This method is called by the State class or its subclasses to notify
+         *  all listeners about a change in State properties.
 	 */
 	protected void notifyUpdate()
 	{

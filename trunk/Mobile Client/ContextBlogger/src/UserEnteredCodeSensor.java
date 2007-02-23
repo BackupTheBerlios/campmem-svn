@@ -16,9 +16,10 @@
  *  IN THE SOFTWARE.
  */
 import javax.microedition.lcdui.*;
-/**
- * @author Tim
- *
+
+/** Sensor that allows the user to enter an object id with the mobile device 
+ *  keyboard.
+ *  @author Tim de Jong
  */
 public class UserEnteredCodeSensor
 					extends Sensor
@@ -26,29 +27,35 @@ public class UserEnteredCodeSensor
 {
 	private TextBox			m_codeBox;
 	private UserEnteredSensorMenu	m_sensorMenu;
-
+        
+        /** Constructor
+         *  @param display, the display that will show this sensors menu during
+         *  sensor operation.
+         */
 	public UserEnteredCodeSensor(Display display)
 	{
 		super("User Entered Code", display);
 		m_sensorMenu = new UserEnteredSensorMenu(this, display);
 	}
 
-	/* (non-Javadoc)
-	 * @see ounl.otec.CampusMemories.Mobile.Sensor#startSensor()
+	/** Normally starts operating the sensor, however this method is not
+         *  used by the user entered code sensor.
 	 */
 	public void startSensor()
 	{
 	}
 
-	/* (non-Javadoc)
-	 * @see ounl.otec.CampusMemories.Mobile.Sensor#stopSensor()
+	/** Normally stops operating the sensor, however this method is not used
+         *  by the user entered code sensor.
 	 */
 	public void stopSensor()
 	{
 	}
 
-	/**
-	 */
+	/** Implements the CommandListener interface method to handle sensor menu specific commands
+         *  @param c, the command that is carried out on the sensor menu
+         *  @param d, the displayable in the sensor menu that caused the command to be carried out.
+         */
 	public void commandAction(Command c, Displayable s)
 	{
 		//if code entered, send update information to sensorlisteners
@@ -67,32 +74,47 @@ public class UserEnteredCodeSensor
 		}
 	}
 
-	/**
+	/** Returns the sensor menu used at sensor activation by the user to enter
+         *  an object id code manually.
+         *  @return a VisualMenu that makes it possible for the user to enter an
+         *  object id via the mobile device keyboard.
 	 */
 	public VisualMenu getSensorMenu()
 	{
 		return m_sensorMenu;
 	}
 
-	/**
+	/** Since this sensor does not need any configuration, this method does
+         *  not return any graphical menu, instead it returns nothing(null)
+         *  @return null, this sensor does not need to be configured.
 	 */
 	public StateChangeMenu getSensorConfigMenu()
 	{
 		return null;
 	}
 
-	/**
+	/** Inner class giving the implementation for the menu used at the activation
+         *  of the UserEnteredSensorMenu.
+         *  @author Tim de Jong
 	 */
-	class UserEnteredSensorMenu extends VisualMenu
+	private class UserEnteredSensorMenu extends VisualMenu
 	{
 		CommandListener             m_owner;
-
+                
+                /** Constructor
+                 *  @param owner, the command listener the commands of this menu should be
+                 *  send to. In this case the sensor.
+                 *  @param ownerDisplay, the display that will be used to display this menu.
+                 */
 		public UserEnteredSensorMenu(CommandListener owner, Display ownerDisplay)
 		{
 			super(ownerDisplay);
 			m_owner = owner;
 		}
-
+                
+                /** Creates the graphical user interface for this sensor and return it.
+                 *  @return the graphical representation for this sensor.
+                 */ 
 		public Displayable getDisplayable()
 		{
 			//create textbox for entering code information

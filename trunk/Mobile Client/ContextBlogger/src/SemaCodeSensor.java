@@ -1,6 +1,3 @@
-/**
- *
- */
 //package ounl.otec.CampusMemories.Mobile;
 /*
  *  Copyright (c) <2007> <Open University of the Netherlands, Tim de Jong, Bashar Al Takrouri, Marcus Specht>
@@ -24,9 +21,12 @@ import java.util.Hashtable;
 import javax.microedition.lcdui.*;
 import org.semacode.contactless.visual.VisualTagConnection;
 
-/**
- * @author Tim
- *
+/** Class that implements the functionality of a sensor for semacodes.
+ *  The sensor uses a snapshop capture from a videostream, at a moment indicated
+ *  by the user, as an image that will be decoded by the semacode software. Hence, this sensor
+ *  makes it possible to capture and decode semacode labels to be used in the mobile client object
+ *  identification
+ *  @author Tim de Jong
  */
 public class SemaCodeSensor extends Sensor
                             implements CommandListener
@@ -36,7 +36,9 @@ public class SemaCodeSensor extends Sensor
 	private Player				m_player;
 	private Thread				m_decodeThread;
 
-	/**
+	/** Constructor
+         *  @param display, the display that will be used to display the sensor menu when the
+         *  sensor is active.
 	 */
 	public SemaCodeSensor(Display display)
 	{
@@ -46,21 +48,14 @@ public class SemaCodeSensor extends Sensor
                  //set possible commands for videoCanvas
 	    	m_canvasMenu.getDisplayable().addCommand(CampusConstants.K_CAPTURE_COMMAND);
 	    	m_canvasMenu.getDisplayable().addCommand(CampusConstants.K_BACK_COMMAND);
-                m_canvasMenu.getDisplayable().setCommandListener(this);
-                
-		/*try
-		{
-			m_player = Manager.createPlayer("capture://video");                        
-                        
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}   */          
+                m_canvasMenu.getDisplayable().setCommandListener(this);               
+		       
 	}
 
-        /**
-	 */
+        /** Implements the CommandListener interface method to handle sensor menu specific commands
+         *  @param c, the command that is carried out on the sensor menu
+         *  @param d, the displayable in the sensor menu that caused the command to be carried out.
+         */
 	public void commandAction(Command c, Displayable s)
 	{
 		//if code entered, send update information to sensorlisteners
@@ -69,9 +64,7 @@ public class SemaCodeSensor extends Sensor
 			//add the entered code as object id to sensor data
                         decode();    
 			//notify the sensor listeners of the update
-			//notifySensorUpdate();
-                        //stop the sensor
-                       // this.stopSensor();
+			//notifySensorUpdate();                        
 		}
 		else if (c == CampusConstants.K_BACK_COMMAND)
 		{
@@ -79,7 +72,7 @@ public class SemaCodeSensor extends Sensor
 		}
 	}
 	
-        /**
+        /** Starts the sensor and the capturing of the video.
 	 */
 	public void startSensor()
 	{
@@ -116,7 +109,7 @@ public class SemaCodeSensor extends Sensor
 	    }
 	}
 
-	/**
+	/** Stops the sensor, the videocapturing and cleans up.
 	 */
 	public void stopSensor()
 	{
@@ -143,7 +136,7 @@ public class SemaCodeSensor extends Sensor
                 }
 	}
 
-	/**
+	/** Spawns a new thread that captures a semacode image and decodes it.
 	 */
 	public void decode()
 	{         
@@ -153,11 +146,14 @@ public class SemaCodeSensor extends Sensor
             m_decodeThread.start();
 	}
 
-	/**
+	/** Private class that decodes the semacode image in a different thread.
+         *  @author Tim de Jong
 	 */
 	private class SemaDecoder implements Runnable
 	{              
 
+                /** Constructor
+                 */ 
                 public SemaDecoder()                
                 {                        
                 }
@@ -201,14 +197,18 @@ public class SemaCodeSensor extends Sensor
                 }
 	}
 
-	/**
+	/** Gets the menu that displays the graphical user interface when the sensor
+         *  is active.
+         *  @return the VisualMenu during sensor operation.
 	 */
 	public VisualMenu getSensorMenu()
 	{
 		return m_canvasMenu;
 	}
 
-	/**
+	/** Gets the menu that is used to configure the sensor. As this sensor does not
+         *  need any configuration, this method returns null.
+         *  @return null, this sensor does not have a config menu.
 	 */
 	public StateChangeMenu getSensorConfigMenu()
 	{
