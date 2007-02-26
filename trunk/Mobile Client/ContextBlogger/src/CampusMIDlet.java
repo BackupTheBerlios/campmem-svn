@@ -55,7 +55,7 @@ public class CampusMIDlet
 		 */
 		public void startApp()
 		{            
-                    try
+                    /*try
                     {
                         //check where the context blogger service is located
                         String serverURL = getServerURL();                        
@@ -69,7 +69,7 @@ public class CampusMIDlet
                     catch(IOException e)
                     {
                         e.printStackTrace();
-                    }                    
+                    } */                   
                     //if there are updates add update menu in front of login menu
                     
                     LoginMenu loginMenu = m_menuFactory.buildLoginMenu();
