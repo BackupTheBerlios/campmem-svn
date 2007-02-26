@@ -38,7 +38,7 @@ public class Menu
 	/** Constructor
          *  Creates a menu hierarchy that has a specific parent menu. This constructor is meant to be used to
          *  construct a menu hierarchy at a lower level.
-         *  @param parent, a parent menu node for this part of the menu hierarchy.		
+         *  @param parent a parent menu node for this part of the menu hierarchy.		
 	 */
 	public Menu(Menu parent)
 	{
@@ -46,7 +46,7 @@ public class Menu
 	}
 
 	/** Sets the parent menu node for this menu.
-         *  @param parent, the parent menu node for this menu.
+         *  @param parent the parent menu node for this menu.
 	 */
 	public void setParent(Menu parent)
 	{
@@ -62,7 +62,7 @@ public class Menu
 	}
 
 	/** Adds a child menu to this menu's collection of children.
-         *  @param child, a child menu to be added.
+         *  @param child a child menu to be added.
 	 */
 	public void addChild(Menu child)
 	{
@@ -72,7 +72,7 @@ public class Menu
 
 	/** Removes a child from this menu's child collection and with it
          *  a menu hierarchy below that child node 
-         *  @param child, the child to be deleted.
+         *  @param child the child to be deleted.
          *  @return true if the removal was successfull, false otherwise.
 	 */
 	public boolean removeChild(Menu child)
@@ -89,7 +89,7 @@ public class Menu
 	}
 
 	/** Sets an entire collection of children for this menu.
-         *  @param children, a new collection of children for this menu.
+         *  @param children a new collection of children for this menu.
          *  Note: if there was an old collection of children before calling this
          *  operation it will be deleted!
 	 */

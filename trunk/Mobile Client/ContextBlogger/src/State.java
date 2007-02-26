@@ -29,7 +29,7 @@ public class State
 	private Vector				m_listeners = new Vector();
 
 	/** Constructor.
-         *  @param stateName, a unique name describing the state.
+         *  @param stateName a unique name describing the state.
 	 */
 	public State(String stateName)
 	{
@@ -45,9 +45,9 @@ public class State
 	}
 
 	/** Sets a key-value pair describing a property of this state.
-         *  @param valueKey, the key describing the property, ie. the name of 
+         *  @param valueKey the key describing the property, ie. the name of 
          *  the property to be set.
-         *  @param value, the value of the property to be set.
+         *  @param value the value of the property to be set.
 	 */
 	public void setValue(String valueKey, Object value)
 	{
@@ -56,7 +56,7 @@ public class State
 	}
 
 	/** Removes a key-value pair describing a property of this state.
-         *  @param valueKey, the key describing the property to be deleted.
+         *  @param valueKey the key describing the property to be deleted.
 	 */
 	public void removeValue(String valueKey)
 	{
@@ -65,7 +65,7 @@ public class State
 	}
 
 	/** Gets a value of a certain property indicated by valueKey.
-         *  @param valueKey, the name of the property to get the value from.
+         *  @param valueKey the name of the property to get the value from.
          *  @return the value of the property with the name given by valueKey.
 	 */
 	public Object getValue(String valueKey)
@@ -84,7 +84,7 @@ public class State
 
 	/** Adds a StateListener to this State that will be informed about each
          *  update that is made to this state.
-         *  @param listener, an object implementing the IStateListener that will
+         *  @param listener an object implementing the IStateListener that will
          *  be added to this state to be informed about all updates.
 	 */
 	public void addStateListener(IStateListener listener)
@@ -94,7 +94,7 @@ public class State
 
 	/** Removes a StateListener from this State. The StateListener will not
          *  be informed about any State updates afterwards.
-         *  @param the listener object to be deleted.
+         *  @param listener the listener object to be deleted.
 	 */
 	public boolean removeStateListener(IStateListener listener)
 	{

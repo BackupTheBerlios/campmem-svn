@@ -36,7 +36,7 @@ public class ObjectIdStateListener implements IStateListener
     }
     
     /** Called whenever a State this StateListener is attached to has been changed.
-     *  @param s, the State which value has changed.
+     *  @param s the State which value has changed.
      */
     public void stateUpdated(State s)
     {

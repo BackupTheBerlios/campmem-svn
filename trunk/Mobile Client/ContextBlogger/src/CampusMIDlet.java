@@ -159,7 +159,7 @@ public class CampusMIDlet
 
 		/** Called when a sensor error occurs. This method is a central place to handle all exceptions caused
                  *  by exceptions. A standard error dialog will be displayed afterwards.
-                 *  @param e, the exception that was thrown by the sensor and gives an indication of what kind of error
+                 *  @param e the exception that was thrown by the sensor and gives an indication of what kind of error
                  *  occured.
 		 */
 		public void sensorError(Exception e)

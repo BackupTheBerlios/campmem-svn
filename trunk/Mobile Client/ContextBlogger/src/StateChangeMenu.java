@@ -30,11 +30,11 @@ public class StateChangeMenu extends VisualMenu
 	private Hashtable			m_stateChanges = new Hashtable();
 
 	/** Constructor.
-         *  @param ownerDisplay, the display that is used to display this menu.
+         *  @param ownerDisplay the display that is used to display this menu.
          *  Note: this is only needed for the VisualMenu this menu inherits from,
          *  the menu itself does not have a graphical representation and therefore
          *  does not need a display.
-         *  @param state, the state that should be changed when this menu has been
+         *  @param state the state that should be changed when this menu has been
          *  chosen.   
 	 */
 	public StateChangeMenu(Display ownerDisplay, State state)
@@ -43,16 +43,16 @@ public class StateChangeMenu extends VisualMenu
 	}
 
 	/** Constructor.
-         *  @param ownerDisplay, the display that is used to display this menu.
+         *  @param ownerDisplay the display that is used to display this menu.
          *  Note: this is only needed for the VisualMenu this menu inherits from,
          *  the menu itself does not have a graphical representation and therefore
          *  does not need a display.
-         *  @param state, the state that should be changed when this menu has been
+         *  @param state the state that should be changed when this menu has been
          *  chosen.
-         *  @param backCommand, indicates whether a backcommand should be added to the menu.
+         *  @param backCommand indicates whether a backcommand should be added to the menu.
          *  If true a backcommand is added to the menu, if false no command will be added.   
 	 */
-	public StateChangeMenu(Display ownerDisplay, State state, boolean backcommand)
+	public StateChangeMenu(Display ownerDisplay, State state, boolean backCommand)
 	{
 		super(ownerDisplay, backcommand, false);
 		m_menuState = state;
@@ -62,8 +62,8 @@ public class StateChangeMenu extends VisualMenu
          *  property of a state. The property to change is given by the valueField
          *  parameter of this method. The new value this property should be given
          *  is given by newValue.
-         *  @param valueField, the name of the state property to change.
-         *  @param newValue, the new value for the property.
+         *  @param valueField the name of the state property to change.
+         *  @param newValue the new value for the property.
 	 */
 	public void addStateChange(String valueField, Object newValue)
 	{
@@ -72,7 +72,7 @@ public class StateChangeMenu extends VisualMenu
 
 	/** Removes a state change that should change the property indicated by
          *  the valueField parameter.
-         *  @param valueField, the name of the property that was effected by the
+         *  @param valueField the name of the property that was effected by the
          *  state change and for which this state change should be removed.
          *  @return the new value that was attached to this state change.
 	 */

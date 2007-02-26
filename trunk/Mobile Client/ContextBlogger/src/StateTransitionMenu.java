@@ -30,11 +30,11 @@ public class StateTransitionMenu	extends VisualMenu
 	private boolean				m_active = false;
 
 	/** Constructor
-         *  @param ownerDisplay, the display that will display this menu.
-         *  @param transitionState, the state that will be listened to for changes.
+         *  @param ownerDisplay the display that will display this menu.
+         *  @param transitionState the state that will be listened to for changes.
          *  Depending on the changes of the state the controls are transfered to
          *  different child menus.
-         *  @param active, indicates whether the menu is active or not. When true,
+         *  @param active indicates whether the menu is active or not. When true,
          *  the menu is active and transfers control automatically to a child menu
          *  when the transitionState is changed. If false the control is not automatically
          *  transfered.
@@ -52,10 +52,10 @@ public class StateTransitionMenu	extends VisualMenu
          *  check against the K_MENU_ID property of the transition state; if the
          *  K_MENU_ID property is equal to one of the menuIdentifier, control is 
          *  transfered to the menu under that menuIdentifier.
-         *  @param menuIdentifier, a unique identifier for the child menu to be
+         *  @param menuIdentifier a unique identifier for the child menu to be
          *  added. The menuIdentifier will be used to find out what menu to 
          *  transfer control to.
-         *  @param menu, the VisualMenu to be added as a possible transition of 
+         *  @param menu the VisualMenu to be added as a possible transition of 
          *  this transition menu.
          */
 	public void addMenuTransition(String menuIdentifier, VisualMenu menu)
@@ -69,7 +69,7 @@ public class StateTransitionMenu	extends VisualMenu
          *  When the State changes menu is transfered to the menu that has a 
          *  menuIdentifier equal to the value of the K_MENU_ID property of the
          *  stateTransition State.
-         *  @param s, the state that has been changed.
+         *  @param s the state that has been changed.
          */
 	public void stateUpdated(State s)
 	{

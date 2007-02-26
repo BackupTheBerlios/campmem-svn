@@ -29,7 +29,7 @@ public class UserEnteredCodeSensor
 	private UserEnteredSensorMenu	m_sensorMenu;
         
         /** Constructor
-         *  @param display, the display that will show this sensors menu during
+         *  @param display the display that will show this sensors menu during
          *  sensor operation.
          */
 	public UserEnteredCodeSensor(Display display)
@@ -53,10 +53,10 @@ public class UserEnteredCodeSensor
 	}
 
 	/** Implements the CommandListener interface method to handle sensor menu specific commands
-         *  @param c, the command that is carried out on the sensor menu
-         *  @param d, the displayable in the sensor menu that caused the command to be carried out.
+         *  @param c the command that is carried out on the sensor menu
+         *  @param d the displayable in the sensor menu that caused the command to be carried out.
          */
-	public void commandAction(Command c, Displayable s)
+	public void commandAction(Command c, Displayable d)
 	{
 		//if code entered, send update information to sensorlisteners
 		if (c == CampusConstants.K_CAPTURE_COMMAND)

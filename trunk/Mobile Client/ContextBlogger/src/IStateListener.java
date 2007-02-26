@@ -23,7 +23,7 @@ public interface IStateListener
 {
 	/** This method will be called as soon as a state or one of the states that
          *  has added the class implementing this interface has been updated.
-         *  @param s, the state that has been updated.
+         *  @param s the state that has been updated.
 	 */
 	public void stateUpdated(State s);
 }

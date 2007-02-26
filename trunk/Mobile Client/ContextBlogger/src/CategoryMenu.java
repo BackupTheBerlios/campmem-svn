@@ -28,9 +28,9 @@ public class CategoryMenu extends ItemMenu
 {
     BlogEntryListMenu m_categoryEntryMenu;
     
-    /**
-     *  @param ownerDisplay, the display that will be showing this menu.
-     *  @param menuTitle, the title for this categorymenu. 
+    /** Constructor
+     *  @param ownerDisplay the display that will be showing this menu.
+     *  @param menuTitle the title for this categorymenu. 
      */
     public CategoryMenu (Display ownerDisplay, String menuTitle) 
     {

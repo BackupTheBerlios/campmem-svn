@@ -32,8 +32,8 @@ public class BlogEntryListMenu  extends ItemMenu
         private String m_objectID;
         
         /** Constructor for menu that shows all blog entries found.
-         *  @param ownerDisplay, the display that will display this menu.
-         *  @param menuTitle, the title for this itemmenu.
+         *  @param ownerDisplay the display that will display this menu.
+         *  @param menuTitle the title for this itemmenu.
 	 */
 	public BlogEntryListMenu(Display ownerDisplay, String menuTitle)
 	{
@@ -42,9 +42,9 @@ public class BlogEntryListMenu  extends ItemMenu
 	}
        
         /** Constructor
-         *  @param ownerDisplay, the display that will display this menu.
-         *  @param menuTitle, the title for this itemmenu.
-         *  @param filterResults, whether the results this list shows are filtered or not.
+         *  @param ownerDisplay the display that will display this menu.
+         *  @param menuTitle the title for this itemmenu.
+         *  @param filterResults whether the results this list shows are filtered or not.
          *  When filterResults is true the results are filtered according to a category filter
          *  depening on the value K_CATEGORY_FILTER_STATE has. When false, all blog entries are shown.
 	 */
@@ -58,7 +58,7 @@ public class BlogEntryListMenu  extends ItemMenu
          *  of two states. First of all it listens to changes in the object id state; when changed the list has to be updated.
          *  Also, the menu listens to changes in the K_CATEGORY_FILTER_STATE so the filter for the blog entries is updated when
          *  it's changed.
-         *  @param s, the changed state this menu listens to.
+         *  @param s the changed state this menu listens to.
          */
         public void stateUpdated(State s)
         {          

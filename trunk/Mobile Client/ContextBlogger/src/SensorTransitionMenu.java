@@ -27,11 +27,11 @@ public class SensorTransitionMenu extends StateTransitionMenu
     private Sensor m_currentSensor;
     
     /** Constructor
-     *  @param ownerDisplay, the display used to display the sensor menu when the
+     *  @param ownerDisplay the display used to display the sensor menu when the
      *  sensor is active.
-     *  @param transitionState, the state that is listened to and that will be used
+     *  @param transitionState the state that is listened to and that will be used
      *  to choose the sensor menu the control will be transfered to.
-     *  @param active, indicates whether the sensor menu is active. True, if control
+     *  @param active indicates whether the sensor menu is active. True, if control
      *  should automatically be transfered to the submenu, false otherwise.
      */
     public SensorTransitionMenu(Display ownerDisplay, State transitionState, boolean active) 
@@ -43,7 +43,7 @@ public class SensorTransitionMenu extends StateTransitionMenu
      *  as the name for the transition. If the transitionState is changed so that one of the
      *  possible sensor transitions is chosen, the SensorTransitionMenu will transfer control
      *  to that sensor.
-     *  @param s, the sensor that will be added as a sensor transition for this menu.
+     *  @param s the sensor that will be added as a sensor transition for this menu.
      */
     public void addSensorTransition(Sensor s)
     {
@@ -54,7 +54,7 @@ public class SensorTransitionMenu extends StateTransitionMenu
     /** Called when the one of the states this menu listens to has been changed. If the state
      *  changed is the transition state the control is transfered to the sensor represented
      *  by the state value.
-     *  @param s, the state that has been changed.
+     *  @param s the state that has been changed.
      */
     public void stateUpdated(State s)
     {        

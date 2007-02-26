@@ -25,7 +25,7 @@ public class CanvasMenu extends VisualMenu
 	private Canvas m_canvas;
        	
         /** Default Constructor, creates a default menu canvas for this CanvasMenu.
-         *  @param ownerDisplay, the display that is used to show this menu.
+         *  @param ownerDisplay the display that is used to show this menu.
          */
         public CanvasMenu(Display ownerDisplay)
         {
@@ -35,8 +35,8 @@ public class CanvasMenu extends VisualMenu
         
         /** Constructor, takes canvas that should be showed in this CanvasMenu as a
          *  parameter.
-         *  @param ownerDisplay, the display that is used to show this menu.
-         *  @param canvas, the canvas that has to be displayed.
+         *  @param ownerDisplay the display that is used to show this menu.
+         *  @param canvas the canvas that has to be displayed.
 	 */
 	public CanvasMenu(Display ownerDisplay, Canvas canvas)
 	{
@@ -54,7 +54,7 @@ public class CanvasMenu extends VisualMenu
 	}
         
         /** Sets the canvas to be displayed by this menu.
-         *  @param canvas, the canvas to be displayed by this menu.
+         *  @param canvas the canvas to be displayed by this menu.
          */
 	public void setCanvas(Canvas canvas)
         {

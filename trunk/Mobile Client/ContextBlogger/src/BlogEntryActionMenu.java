@@ -26,8 +26,8 @@ public class BlogEntryActionMenu extends ItemMenu
     private BlogEntry               m_entry;
     
     /** Creates a new instance of BlogEntryActionMenu 
-     *  @param ownerDisplay, the display object that will be used to display this menu.
-     *  @param entry, the blog entry the actions should or could be carried out upon.    
+     *  @param ownerDisplay the display object that will be used to display this menu.
+     *  @param entry the blog entry the actions should or could be carried out upon.    
      */
     public BlogEntryActionMenu (Display ownerDisplay, BlogEntry entry) 
     {
@@ -66,7 +66,7 @@ public class BlogEntryActionMenu extends ItemMenu
     }
     
     /** Sets the blog entry that can be acted upon by this menu.
-     *  @param entry, the blog entry the actions in this menu are meant for.
+     *  @param entry the blog entry the actions in this menu are meant for.
      */
     public void setEntry(BlogEntry entry)
     {

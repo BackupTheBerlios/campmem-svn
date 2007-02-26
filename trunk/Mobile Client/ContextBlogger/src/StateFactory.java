@@ -44,8 +44,8 @@ public class StateFactory
 
 	/** Creates a new state, with name given by stateName and attaches a 
          *  certain statelistener to this state.
-         *  @param stateName, the name of the new state to be created.
-         *  @param listener, an object implementing the IStateListener interface
+         *  @param stateName the name of the new state to be created.
+         *  @param listener an object implementing the IStateListener interface
          *  that will be attached to the new State object and will be informed of
          *  all changes that appear in the property of the states.
          *  @return a new state with a name given by stateName.
@@ -60,7 +60,7 @@ public class StateFactory
 
 	/** Checks if a certain state "stateName" exists, if so it returns that state,
          *  if not it returns a new state "stateName"
-         *  @param stateName, the name of the new state of the state to be found
+         *  @param stateName the name of the new state of the state to be found
          *  among the already create states.
          *  @return a new State of an already existing State with name stateName.
 	 */

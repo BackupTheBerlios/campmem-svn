@@ -29,9 +29,9 @@ public class LoginMenu extends StateTransitionMenu
         private State                           m_loginState;   
 	
         /** Constructor
-         *  @param ownerDisplay, the display that will display this menu.
-         *  @param loginState, the state that represents the login progress.
-         *  @param mobileID, the mobile client ID, in this case the IMEI unique device identifier.
+         *  @param ownerDisplay the display that will display this menu.
+         *  @param loginState the state that represents the login progress.
+         *  @param mobileID the mobile client ID, in this case the IMEI unique device identifier.
 	 */
 	public LoginMenu(Display ownerDisplay, State loginState, String mobileID)
 	{

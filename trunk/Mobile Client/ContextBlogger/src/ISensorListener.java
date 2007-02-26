@@ -24,13 +24,13 @@ public interface ISensorListener extends IStateListener
 {
 	/** Called when the state representing the sensor values has been changed.
          *  Inherited from IStateListener.
-         *  @param s, the sensor state that has been changed.  
+         *  @param s the sensor state that has been changed.  
 	 */
 	public void stateUpdated(State s);
 
 	/** Called when an exception occurred during the sensor operation. The subclass should
          *  handle the sensorException or throw it through to a class that can handle it
-         *  @param e, the exception that has been throwed by the sensor.
+         *  @param e the exception that has been throwed by the sensor.
 	 */
 	public void sensorError(Exception e);
 }

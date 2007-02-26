@@ -38,11 +38,11 @@ public class BlogEntry
     
     /** Constructor
      *  Initialises all fields to the values given as parameters to it.
-     *  @param postID, the internal blog entry id this blog entry has. Used to retrieve information about this blog entry
+     *  @param postID the internal blog entry id this blog entry has. Used to retrieve information about this blog entry
      *  from the database.
-     *  @param category, the category for this blog entry.
-     *  @param link, a web-url to the blog entry
-     *  @param title, the title of the blog entry
+     *  @param category the category for this blog entry.
+     *  @param link a web-url to the blog entry
+     *  @param title the title of the blog entry
      */
     public BlogEntry(String postID, String category, String link, String title)
     {
@@ -53,7 +53,7 @@ public class BlogEntry
     }
     
     /** Sets the postID for this blog entry.
-     *  @param postID, a unique postID that is used to identify the blog entry in the database.
+     *  @param postID a unique postID that is used to identify the blog entry in the database.
      */
     public void setPostID(String postID)
     {
@@ -69,7 +69,7 @@ public class BlogEntry
     }
     
     /** Sets the category for this blog entry. 
-     *  @param category, the blog entry category.
+     *  @param category the blog entry category.
      */
     public void setCategory(String category)
     {
@@ -85,7 +85,7 @@ public class BlogEntry
     }
     
     /** Sets the web link to this blog entry.
-     *  @param link, the weburl to the blog entry.
+     *  @param link the weburl to the blog entry.
      */
     public void setLink(String link)
     {
@@ -101,7 +101,7 @@ public class BlogEntry
     }
     
     /** Sets the title for this blog entry.
-     *  @param title, the blog entry title.
+     *  @param title the blog entry title.
      */
     public void setTitle(String title)
     {
@@ -117,7 +117,7 @@ public class BlogEntry
     }
     
     /** Sets the rating the user gives for this blog entry.
-     *  @param rating, a rating on an integer rating scale.
+     *  @param rating a rating on an integer rating scale.
      */
     public void setRating(int rating)
     {
@@ -133,7 +133,7 @@ public class BlogEntry
     }
     
     /** Sets the identification string of the object this blog entry is coupled to.
-     *  @param objectID, a unique identifier identifying an object this blog entry is coupled to.
+     *  @param objectID a unique identifier identifying an object this blog entry is coupled to.
      *  The objectID will be acquired by using the sensors.
      */
     public void setObjectID(String objectID)

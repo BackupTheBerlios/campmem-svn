@@ -25,8 +25,8 @@ public class BlogEntryCommentMenu extends VisualMenu
     private BlogEntry m_entry;  
         
     /** Constructor
-     *  @param ownerDisplay, the display that will be used to display this menu.
-     *  @param entry, the blog entry this menu creates and posts the comments for.
+     *  @param ownerDisplay the display that will be used to display this menu.
+     *  @param entry the blog entry this menu creates and posts the comments for.
      */
     public BlogEntryCommentMenu(Display ownerDisplay, BlogEntry entry) 
     {
@@ -36,7 +36,7 @@ public class BlogEntryCommentMenu extends VisualMenu
     }
     
     /** Builds the comment menu graphical representation.
-     *  @param entry, the blog entry this menu will provide comments for. 
+     *  @param entry the blog entry this menu will provide comments for. 
      */
     private void buildCommentMenu(BlogEntry entry)
     {
@@ -47,8 +47,8 @@ public class BlogEntryCommentMenu extends VisualMenu
     }
     
     /** Overrides the method from the VisualMenu class to handle menu specific commands
-     *  @param c, the command that is carried out on the menu
-     *  @param d, the displayable that caused the command to be carried out.
+     *  @param c the command that is carried out on the menu
+     *  @param d the displayable that caused the command to be carried out.
      */
     public void	commandAction(Command c, Displayable d)
     {

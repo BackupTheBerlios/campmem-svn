@@ -24,7 +24,7 @@ public abstract class Actuator implements IStateListener
         private State m_actingState;
         
 	/** Constructor
-         *  @param actingState, the state this actuator is acting of for.
+         *  @param actingState the state this actuator is acting of for.
 	 */
 	public Actuator(State actingState)
 	{
@@ -42,14 +42,14 @@ public abstract class Actuator implements IStateListener
         
 
 	/** Will be implemented by the subclasses to act in a certain way when a state change occurs.
-         *  @param s, acts on a state s. It uses the data stored in s to act in a certain way, using the
+         *  @param s acts on a state s. It uses the data stored in s to act in a certain way, using the
          *  actuator.
 	 */
 	public abstract void act(State s);
 
 	/** Should be implemented to listen to state changes in the acting state. Depending on some internal
          *  logic a decision can me made to act upon the state change or not.
-         *  @param s, a state that has been change. Doesn't have to be the acting state.
+         *  @param s a state that has been change. Doesn't have to be the acting state.
 	 */
 	public abstract void stateUpdated(State s);
         
@@ -62,7 +62,7 @@ public abstract class Actuator implements IStateListener
         }
         
         /** Sets the acting state for this actuator
-         *  @param s, the state the actuator should act upon.
+         *  @param s the state the actuator should act upon.
          */
         public void setActingState(State s)
         {

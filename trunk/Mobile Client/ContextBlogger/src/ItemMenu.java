@@ -25,8 +25,8 @@ public class ItemMenu extends VisualMenu
 	private List				m_menuItemList;
 
         /** Constructor
-         *  @param ownerDisplay, the display showing this menu
-         *  @param menuTitle, the title of this item menu. This title will be displayed 
+         *  @param ownerDisplay the display showing this menu
+         *  @param menuTitle the title of this item menu. This title will be displayed 
          *  on top of the menu.
          */
         public ItemMenu(Display ownerDisplay, String menuTitle)
@@ -35,10 +35,10 @@ public class ItemMenu extends VisualMenu
         }
 	
         /** Constructor
-         *  @param ownerDisplay, the display showing this menu
-         *  @param menuTitle, the title of this item menu. This title will be displayed 
+         *  @param ownerDisplay the display showing this menu
+         *  @param menuTitle the title of this item menu. This title will be displayed 
          *  on top of the menu.
-         *  @param listType, the type of list as defined in the javax.microedition.lcdui.List class.
+         *  @param listType the type of list as defined in the javax.microedition.lcdui.List class.
          */
 	public ItemMenu(Display ownerDisplay, String menuTitle, int listType)
 	{
@@ -50,8 +50,8 @@ public class ItemMenu extends VisualMenu
         /** Adds a submenu as a menuitem of this item menu. Each VisualMenu added to the item
          *  menu will show up as a choice in the item menu and will be added in the menu's hierarchy
          *  making navigation of the itemmenu to submenus possible.
-         *  @param itemName, the title the menuitem should have in the graphical menu.
-         *  @param subMenu, the VisualMenu that should be added below the itemmenu as a navigation option.
+         *  @param itemName the title the menuitem should have in the graphical menu.
+         *  @param subMenu the VisualMenu that should be added below the itemmenu as a navigation option.
          */
         public void addMenuItem(String itemName, VisualMenu subMenu)
         {
@@ -63,7 +63,7 @@ public class ItemMenu extends VisualMenu
         }
         
 	/** Gets the menuitem located at index among the children 
-         *  @param index, the index among the children of this menu.
+         *  @param index the index among the children of this menu.
          *  @return the VisualMenu that was added as a child at the index location.
 	 */
 	public VisualMenu getMenuItem(int index)
@@ -73,7 +73,7 @@ public class ItemMenu extends VisualMenu
 	}
 
 	/** Removes the child menuitem located at the index position.
-         *  @param index, the location of the menuitem to be removed.
+         *  @param index the location of the menuitem to be removed.
 	 */
 	public void removeMenuItem(int index)
 	{
@@ -105,8 +105,8 @@ public class ItemMenu extends VisualMenu
         }     
                 
 	/** Overrides the method from the VisualMenu class to handle menu specific commands
-         *  @param c, the command that is carried out on the menu
-         *  @param d, the displayable that caused the command to be carried out.
+         *  @param c the command that is carried out on the menu
+         *  @param d the displayable that caused the command to be carried out.
          */
 	public void commandAction(Command c, Displayable d)
 	{

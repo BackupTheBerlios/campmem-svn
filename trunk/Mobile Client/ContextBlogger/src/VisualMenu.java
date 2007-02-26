@@ -27,7 +27,7 @@ public abstract class VisualMenu    extends Menu
         private boolean                         m_quitCommand;
         
 	/** Constructor
-         *  @param ownerDisplay, the display that will be used to show this visual menu.
+         *  @param ownerDisplay the display that will be used to show this visual menu.
 	 */
 	public VisualMenu(Display ownerDisplay)
 	{
@@ -35,9 +35,9 @@ public abstract class VisualMenu    extends Menu
 	}
 
 	/** Constructor
-         *  @param ownerDisplay, the display that will be used to show this visual menu.
-         *  @param backCommand, if true a back command will be added to the menu. 
-         *  @param quitCommand, if true a quit command will be added to the menu.
+         *  @param ownerDisplay the display that will be used to show this visual menu.
+         *  @param backCommand if true a back command will be added to the menu. 
+         *  @param quitCommand if true a quit command will be added to the menu.
 	 */
 	public VisualMenu(Display ownerDisplay, boolean backCommand, boolean quitCommand)
 	{
@@ -74,8 +74,8 @@ public abstract class VisualMenu    extends Menu
         *  Subclasses can override this method to handle more commands, but for
         *  the back and exit commands they should call this method to handle these
         *  commands.
-        *  @param c, the command that is carried out on the menu
-        *  @param d, the displayable that caused the command to be carried out.
+        *  @param c the command that is carried out on the menu
+        *  @param d the displayable that caused the command to be carried out.
         */
 	public void commandAction(Command c, Displayable d)
 	{
@@ -113,7 +113,7 @@ public abstract class VisualMenu    extends Menu
 	}
         
         /** Sets whether the back command should be available.
-         *  @param available, true if a back command should be added to the menu,
+         *  @param available true if a back command should be added to the menu,
          *  false otherwise.
          */
         public void setBackCommandAvailable(boolean available)
@@ -131,7 +131,7 @@ public abstract class VisualMenu    extends Menu
         }
         
         /** Sets whether the quit command should be available.
-         *  @param available, true if a quit command should be added to the menu,
+         *  @param available true if a quit command should be added to the menu,
          *  false otherwise.
          */
         public void setQuitCommandAvailable(boolean available)

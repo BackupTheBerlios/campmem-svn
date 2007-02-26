@@ -26,7 +26,7 @@ public class BlogEntryCreateMenu extends VisualMenu
     private TextField               m_bodyField;
     
     /** Constructor
-     *  @param ownerDisplay, the display object that will be used to display the menu
+     *  @param ownerDisplay the display object that will be used to display the menu
      */
     public BlogEntryCreateMenu(Display ownerDisplay) 
     {
@@ -54,8 +54,8 @@ public class BlogEntryCreateMenu extends VisualMenu
     }
     
     /** Overrides the method from the VisualMenu class to handle menu specific commands
-     *  @param c, the command that is carried out on the menu
-     *  @param d, the displayable that caused the command to be carried out.
+     *  @param c the command that is carried out on the menu
+     *  @param d the displayable that caused the command to be carried out.
      */
     public void	commandAction(Command c, Displayable d)
     {

@@ -29,8 +29,8 @@ public abstract class Sensor extends State
 	protected Hashtable                     m_configData = new Hashtable();
 
 	/** Constructor
-         *  @param sensorName, the name of the sensor.
-         *  @param display, the display that will be used to show a graphical menu during
+         *  @param sensorName the name of the sensor.
+         *  @param display the display that will be used to show a graphical menu during
          *  sensor operation.
 	 */
 	public Sensor(String sensorName, Display display)
@@ -43,7 +43,7 @@ public abstract class Sensor extends State
 	/** Adds a ISensorListener to the list of state listeners of this Sensor.
          *  The sensor listener that is added to the sensor is informed about all
          *  sensor changes and all sensor errors.
-         *  @param listener, the sensor listener to be attached to this sensor.
+         *  @param listener the sensor listener to be attached to this sensor.
 	 */
 	public void addSensorListener(ISensorListener listener)
 	{		
@@ -58,7 +58,7 @@ public abstract class Sensor extends State
 	}
 
 	/** Notifies all sensor listeners that an error occured during sensor execution.
-         *  @param e, the exception that occured during sensor execution.
+         *  @param e the exception that occured during sensor execution.
 	 */
 	public void notifySensorError(Exception e)
 	{
@@ -96,7 +96,7 @@ public abstract class Sensor extends State
 	/** Returns the display that this sensor uses to display any graphical
          *  user interface during sensor execution. This method will be mostly 
          *  used by the subclasses to get the display object stored in this class.
-         *  @return
+         *  @return the display used to show the menu.
 	 */
 	public Display getDisplay()
 	{

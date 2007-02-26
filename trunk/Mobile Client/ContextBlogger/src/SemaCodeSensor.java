@@ -37,7 +37,7 @@ public class SemaCodeSensor extends Sensor
 	private Thread				m_decodeThread;
 
 	/** Constructor
-         *  @param display, the display that will be used to display the sensor menu when the
+         *  @param display the display that will be used to display the sensor menu when the
          *  sensor is active.
 	 */
 	public SemaCodeSensor(Display display)
@@ -53,10 +53,10 @@ public class SemaCodeSensor extends Sensor
 	}
 
         /** Implements the CommandListener interface method to handle sensor menu specific commands
-         *  @param c, the command that is carried out on the sensor menu
-         *  @param d, the displayable in the sensor menu that caused the command to be carried out.
+         *  @param c the command that is carried out on the sensor menu
+         *  @param d the displayable in the sensor menu that caused the command to be carried out.
          */
-	public void commandAction(Command c, Displayable s)
+	public void commandAction(Command c, Displayable d)
 	{
 		//if code entered, send update information to sensorlisteners
 		if (c == CampusConstants.K_CAPTURE_COMMAND)

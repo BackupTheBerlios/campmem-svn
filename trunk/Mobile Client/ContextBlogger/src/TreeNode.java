@@ -27,7 +27,7 @@ public class TreeNode
 
 	/** Default Constructor
          *  Constructs a root node with no parent.
-         *  @param value, the value stored in this TreeNode.
+         *  @param value the value stored in this TreeNode.
 	 */
 	public TreeNode(Object value)
 	{
@@ -37,8 +37,8 @@ public class TreeNode
 	/** Constructor
          *  Constructs a node or node hierarchy that is add below a certain
          *  parent node.
-         *  @param parent, the parent node for this node or node hierarchy.
-         *  @param value, the value stored in this TreeNode
+         *  @param parent the parent node for this node or node hierarchy.
+         *  @param value the value stored in this TreeNode
 	 */
 	public TreeNode(TreeNode parent, Object value)
 	{
@@ -47,7 +47,7 @@ public class TreeNode
 	}
 
 	/** Sets the parent for this node/node hierarchy
-         *  @param parent, the parent of this node
+         *  @param parent the parent of this node
 	 */
 	public void setParent(TreeNode parent)
 	{
@@ -63,7 +63,7 @@ public class TreeNode
 	}
 
 	/** Sets the value stored in this node.
-         *  @param value, the value to be stored in this node.
+         *  @param value the value to be stored in this node.
 	 */
 	public void setValue(Object value)
 	{
@@ -80,7 +80,7 @@ public class TreeNode
 
 	/** Adds a child node to this node. Also sets the parent of this child to this
          *  node.
-         *  @param child, the child node to be added.
+         *  @param child the child node to be added.
 	 */
 	public void addChild(TreeNode child)
 	{
@@ -89,7 +89,7 @@ public class TreeNode
 	}
 
 	/** Removes a child node from this node.
-         *  @param child, the child to be removed.
+         *  @param child the child to be removed.
          *  @return true if removing the child was successful, false otherwise.
 	 */
 	public boolean removeChild(TreeNode child)
@@ -109,7 +109,7 @@ public class TreeNode
          *  before this method was called, they are deleted from the node and
          *  replaced by the vector with children given as a parameter to this
          *  node.
-         *  @param children, the new collection of children to be added to the node.
+         *  @param children the new collection of children to be added to the node.
 	 */
 	public void setChildren(Vector children)
 	{

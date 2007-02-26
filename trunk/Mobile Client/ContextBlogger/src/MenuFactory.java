@@ -31,8 +31,8 @@ public class MenuFactory
         private ObjectIdStateListener                   m_objectIdStateListener;
         
 	/** Constructor
-         *  @param owner, the MIDLet that owns this menu factory.
-         *  @param ownerDisplay, the display that is used to show all VisualMenus in the hierarchy.
+         *  @param owner the MIDLet that owns this menu factory.
+         *  @param ownerDisplay the display that is used to show all VisualMenus in the hierarchy.
 	 */
 	public MenuFactory(CampusMIDlet owner, Display ownerDisplay)
 	{
@@ -44,7 +44,7 @@ public class MenuFactory
 	}
 
 	/** Sets the owner display for this menu factory.
-         *  @param ownerDisplay, the display that is used to show all VisualMenus in the hierarchy.
+         *  @param ownerDisplay the display that is used to show all VisualMenus in the hierarchy.
 	 */
 	public void setOwnerDisplay(Display ownerDisplay)
 	{

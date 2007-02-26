@@ -23,14 +23,14 @@
 public interface IControllerLogic
 {
 	/** Returns whether the specific state s is handled by controller logic
-         *  @param s, the state that has to be handled.
+         *  @param s the state that has to be handled.
          *  @return true if the state s is handled by the subclass of this controller logic interface.
          *  false, if the state s is not handled.
 	 */
 	public boolean isHandling(State s);
 
 	/** Performs the logic on or depending on the state s.
-         *  @param s, the state that has to be handled by this interface's subclass.
+         *  @param s the state that has to be handled by this interface's subclass.
          *  @return a state representing the results of the logic carried out. This can be a changed state s
          *  or a new state with values depending on the logic carried out on s.
 	 */
