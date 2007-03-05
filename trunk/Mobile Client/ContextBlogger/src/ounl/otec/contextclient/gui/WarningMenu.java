@@ -17,6 +17,7 @@ package ounl.otec.contextclient.gui;
  */
 import javax.microedition.lcdui.*;
 import ounl.otec.contextclient.main.CampusConstants;
+import ounl.otec.contextclient.state.State;
 
 /** Provides the user interface with a standard Warning Screen that should be used
  *  when an exception or error occurs. The Menu can handle both critical as 
@@ -83,6 +84,14 @@ public class WarningMenu extends VisualMenu
         {
             super.commandAction(c,d);
         }
+    }
+    
+    /**
+     *  @param
+     */
+    public void stateUpdated(State s)
+    {
+        
     }
     
     /** Gets the displayable giving a graphical representation for this menu

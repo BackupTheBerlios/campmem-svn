@@ -62,20 +62,11 @@ public class BlogEntryCommentMenu extends VisualMenu
            //check if the comment is not empty, we won't post any empty comments
            if (!commentText.equals(""))
            {
-               State commentState = CampusConstants.K_STATE_FACTORY.getState("");
-               changeState(commentState);
-               //post the comment
-               /*try
-               {
-                    String test = CampusConstants.K_BLOGGER_STUB.postComment(CampusConstants.K_MOBILE_ID, m_entry.getPostID(), commentText);                    
-                    //if the comment has been posted return to the parent menu
-                    VisualMenu parentMenu = (VisualMenu) getParent();
-                    getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
-               }
-               catch (java.rmi.RemoteException e)
-               {
-                   e.printStackTrace();
-               }*/
+               State commentState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_COMMENT_STATE);
+               commentState.setValue(CampusConstants.K_BLOG_ENTRY_KEY, m_entry);
+               commentState.setValue(CampusConstants.K_COMMENT_KEY, commentText);
+               changeState(commentState); 
+               this.setWaiting(true);
            }
         }
         else
@@ -89,6 +80,26 @@ public class BlogEntryCommentMenu extends VisualMenu
      */
     public void stateUpdated(State s)
     {
+        State commentState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_COMMENT_STATE);        
+        if (s.equals(commentState))
+        {
+            Boolean result = (Boolean)s.getValue(CampusConstants.K_RESULT_KEY);
+            if (result.booleanValue())
+            {
+                //operation has succeeded, don't display the waiting screen anymore
+                this.setWaiting(false);
+                //if the comment has been posted return to the parent menu
+                VisualMenu parentMenu = (VisualMenu) getParent();
+                getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
+                //commentState.clearAllData();                
+            }
+            else
+            {
+                //operation did not succeed yet!
+                this.setWaiting(false);
+                //show error message
+            }
+        }
     }
     
     /** Returns the displayable for this menu. The displayable is a graphic representation of this menu. Also this method has

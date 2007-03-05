@@ -47,7 +47,7 @@ public class SemaCodeSensor extends Sensor
 	{
 		super("SemaCodeSensor", display);
 
-		m_canvasMenu = new CanvasMenu(display);
+		m_canvasMenu = new CanvasMenu(display, "SemaCodeSensorCanvas");
                  //set possible commands for videoCanvas
 	    	m_canvasMenu.getDisplayable().addCommand(CampusConstants.K_CAPTURE_COMMAND);
 	    	m_canvasMenu.getDisplayable().addCommand(CampusConstants.K_BACK_COMMAND);

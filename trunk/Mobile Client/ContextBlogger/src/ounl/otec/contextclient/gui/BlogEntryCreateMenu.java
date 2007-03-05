@@ -27,7 +27,7 @@ public class BlogEntryCreateMenu extends VisualMenu
     private Displayable             m_displayable;
     private TextField               m_titleField;
     private TextField               m_bodyField;
-    
+    private State                   m_entryCreateState;
     /** Constructor
      *  @param ownerDisplay the display object that will be used to display the menu.
      *  @param menuName the name and title for this menu.
@@ -35,6 +35,7 @@ public class BlogEntryCreateMenu extends VisualMenu
     public BlogEntryCreateMenu(Display ownerDisplay, String menuName) 
     {
         super (ownerDisplay, menuName);
+        m_entryCreateState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_CREATE_STATE);
         createMenu();
     }
     
@@ -66,33 +67,19 @@ public class BlogEntryCreateMenu extends VisualMenu
         if (c == CampusConstants.K_SUBMIT_COMMAND)
         {
            //get the entered blog parameters
-           String title = m_titleField.getString();
-           String body = m_bodyField.getString();
+           m_entryCreateState.setValue(CampusConstants.K_TITLE_KEY, m_titleField.getString());
+           m_entryCreateState.setValue(CampusConstants.K_BODY_KEY, m_bodyField.getString());
            //maybe it's a good idea to make one state for the object id, this state can be updated 
            //and queried whenever the object id is needed.           
            State objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
-           String objectID = (String)objectIDState.getValue(CampusConstants.K_OBJECT_ID_KEY); 
+           String objectID = (String)objectIDState.getValue(CampusConstants.K_OBJECT_ID_KEY);
+           m_entryCreateState.setValue(CampusConstants.K_OBJECT_ID_KEY, objectID);
+           
            String categories = "";                      
-
-           //post the blog entry to the blog
-           try
-           {
-               CampusConstants.K_BLOGGER_STUB.post(CampusConstants.K_MOBILE_ID, objectID, categories, title, body);
-               //this class adds another blog entry to the blog, therefore the list of available blog entries has to be updated.
-               //by setting the objectIDState to its current value, actually nothing changes, however setting the objectID value
-               //sparks a new stateChange, every listener will therefore informed that the object has changed and that the list
-               //of available blog entries has to be updated. This is a somewhat dirty hack that will disappear as soon as 
-               //the caching functionality is available.
-               objectIDState.setValue(CampusConstants.K_OBJECT_ID_STATE, objectID);
-               //if the post has been done, return to the parent menu! 
-               //TODO add an operation for this in the visualmenu class!
-               VisualMenu parentMenu = (VisualMenu)this.getParent();
-               this.getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
-           }
-           catch (java.rmi.RemoteException e)
-           {
-               e.printStackTrace();
-           }
+           m_entryCreateState.setValue(CampusConstants.K_CATEGORIES_KEY, categories);
+           //request a state change to add a blog entry to the blog
+           changeState(m_entryCreateState);
+           this.setWaiting(true);
         }
         else
         {
@@ -104,6 +91,22 @@ public class BlogEntryCreateMenu extends VisualMenu
      */
     public void stateUpdated(State s)
     {
+        if (s.equals(m_entryCreateState))
+        {
+            Boolean result = (Boolean)m_entryCreateState.getValue(CampusConstants.K_RESULT_KEY);
+            if (result.booleanValue())
+            {
+                this.setWaiting(false);
+                //if the post has been done, return to the parent menu! 
+                //TODO add an operation for this in the visualmenu class!
+                VisualMenu parentMenu = (VisualMenu)this.getParent();
+                this.getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
+            }
+            else
+            {
+                
+            }
+        }
     }
     
     /** Returns the displayable that provides the graphical representation of this menu

@@ -17,6 +17,7 @@ package ounl.otec.contextclient.gui;
  */
 import java.util.*;
 import javax.microedition.lcdui.*;
+import ounl.otec.contextclient.gui.*;
 import ounl.otec.contextclient.sensor.SemaCodeSensor;
 import ounl.otec.contextclient.sensor.Sensor;
 import ounl.otec.contextclient.sensor.UserEnteredCodeSensor;
@@ -44,7 +45,7 @@ public class MenuFactory
 	 */
 	public MenuFactory(CampusMIDlet owner, Display ownerDisplay)
 	{
-		m_owner = owner;
+                m_owner = owner;
 		m_ownerDisplay = ownerDisplay;
                 m_objectIdStateListener = new ObjectIdStateListener();
                 
@@ -88,7 +89,7 @@ public class MenuFactory
 		//add mainMenu after the login menu
 		loginMenu.addMenuTransition(CampusConstants.K_SIGNED_IN, m_mainMenu);
 		
-                LoginFailedMenu loginFailedMenu = new LoginFailedMenu(m_ownerDisplay);
+                LoginFailedMenu loginFailedMenu = new LoginFailedMenu(m_ownerDisplay, "Login Failed");
                 loginMenu.addMenuTransition(CampusConstants.K_LOGIN_FAILED, loginFailedMenu);
 
                 //disable mainmenu back command and enable quitcommand
@@ -107,7 +108,7 @@ public class MenuFactory
             mainMenu.addMenuItem("Scan New Object", scanObjectMenu);
             mainMenu.addMenuItem("Select Sensor", sensorMenu);
             mainMenu.addMenuItem("View Current Object", blogFilterMenu);
-            mainMenu.addMenuItem("Create New Entry", new BlogEntryCreateMenu(m_ownerDisplay));
+            mainMenu.addMenuItem("Create New Entry", new BlogEntryCreateMenu(m_ownerDisplay, "BlogEntryCreateMenu"));
             //disable mainmenu back command and enable quitcommand
             mainMenu.setBackCommandAvailable(false);
             mainMenu.setQuitCommandAvailable(true);

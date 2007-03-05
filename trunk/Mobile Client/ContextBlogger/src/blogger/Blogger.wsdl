@@ -231,4 +231,4 @@
         <soap:body use="literal"/></output></operation></binding>
   <service name="Blogger">
     <port name="BloggerSEIPort" binding="tns:BloggerSEIBinding">
-      <soap:address location="http://192.168.0.122:8080/CM1/Blogger" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/></port></service></definitions>
+      <soap:address location="http://LAPTOPTJO:8080/CM1/Blogger" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"/></port></service></definitions>

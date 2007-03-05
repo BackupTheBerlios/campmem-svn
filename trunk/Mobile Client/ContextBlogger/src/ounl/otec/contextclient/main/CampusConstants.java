@@ -16,7 +16,6 @@ package ounl.otec.contextclient.main;
  *  IN THE SOFTWARE.
  */
 import javax.microedition.lcdui.*;
-import blogger.*;
 import ounl.otec.contextclient.state.StateFactory;
 import ounl.otec.contextclient.connection.ConnectionManager;
 
@@ -53,15 +52,26 @@ public class CampusConstants
 	public static final String  K_MENU_ID					= "MENU_ID";
         public static final String  K_QUIT_KEY                                  = "QUIT_KEY";
         public static final String  K_CATEGORY_KEY                              = "CATEGORY_KEY";
-        public static final String  K_CATEGORIES_KEY                            = "CATEGORIES_KEY";
-                
+        public static final String  K_CATEGORIES_KEY                            = "CATEGORIES_KEY";       
+        public static final String  K_COMMENT_KEY                               = "COMMENT_KEY";
+        public static final String  K_RESULT_KEY                                = "RESULT_KEY";
+        public static final String  K_TITLE_KEY                                 = "TITLE_KEY";
+        public static final String  K_BODY_KEY                                  = "BODY_KEY";
+        public static final String  K_RATE_KEY                                  = "RATE_KEY";
+        public static final String  K_ITEM_NAMES_KEY                            = "ITEM_NAMES_KEY";
+        public static final String  K_ITEM_VALUES_KEY                           = "ITEM_VALUES_KEY";
+        
 	public static final String  K_CURRENT_SENSOR				= "CURRENT_SENSOR";
 	public static final String  K_LOGIN_STATE				= "LOGIN_STATE";
         public static final String  K_OBJECT_ID_STATE                           = "OBJECT_ID_STATE";
         public static final String  K_ENTRIES_STATE                             = "ENTRIES_STATE";
+        public static final String  K_CATEGORY_LIST_STATE                       = "CATEGORY_LIST_STATE";
         public static final String  K_CATEGORY_FILTER_STATE                     = "CATEGORY_FILTER_STATE";
         public static final String  K_CATEGORY_FILTER_MENU_STATE                = "CATEGORY_FILTER_MENU_STATE";
-        public static final String  K_QUIT_STATE                                = "QUIT_STATE";
+        public static final String  K_COMMENT_STATE                             = "COMMENT_STATE";
+        public static final String  K_ENTRY_CREATE_STATE                        = "ENTRY_CREATE_STATE";
+        public static final String  K_RATING_STATE                              = "RATING_STATE";
+        public static final String  K_QUIT_STATE                                = "QUIT_STATE";        
         //login constants
 	public static final String  K_INIT_LOGIN                                = "INIT_LOGIN";
 	public static final String  K_LOGGING_IN                                = "LOGGING_IN";
@@ -73,7 +83,6 @@ public class CampusConstants
         public static final Command K_SUBMIT_COMMAND                            = new Command("Submit", Command.SCREEN, 2);
 	public static final Command K_EXIT_COMMAND				= new Command("Exit", Command.SCREEN, 2);
         //global variables
-	public static final StateFactory        K_STATE_FACTORY                 = new StateFactory();
-        public static final BloggerSEI_Stub     K_BLOGGER_STUB                  = new BloggerSEI_Stub();//move to ConnectionManager class
+	public static final StateFactory        K_STATE_FACTORY                 = new StateFactory();        
         public static final ConnectionManager   K_CONNECTION_MANAGER            = new ConnectionManager();
 }

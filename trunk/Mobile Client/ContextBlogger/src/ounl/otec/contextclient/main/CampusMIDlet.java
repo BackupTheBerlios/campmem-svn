@@ -25,6 +25,7 @@ import ounl.otec.contextclient.gui.*;
 import ounl.otec.contextclient.sensor.*;
 import ounl.otec.contextclient.state.State;
 import ounl.otec.contextclient.main.CampusConstants;
+import ounl.otec.contextclient.connection.ConnectionManager;
 
 /** Main class for the ContextBlogger Mobile Client.
  *  @author Tim de Jong
@@ -46,11 +47,11 @@ public class CampusMIDlet
 		/** Constructor
 		 */
 		public CampusMIDlet()
-		{
+		{                                          
                         //get mobile identification number for user identification
-                        CampusConstants.K_MOBILE_ID = this.getMobileID();
-			m_display = Display.getDisplay(this);
-			m_menuFactory = new MenuFactory(this, m_display);
+                        CampusConstants.K_MOBILE_ID = this.getMobileID();                       
+                        m_display = Display.getDisplay(this);
+                        m_menuFactory = new MenuFactory(this, m_display);
 		}
 
 		/** This method will be called at startup. It first checks the location of the ContextBlogger service
@@ -74,8 +75,7 @@ public class CampusMIDlet
                     {
                         e.printStackTrace();
                     } */                   
-                    //if there are updates add update menu in front of login menu
-                    
+                    //if there are updates add update menu in front of login menu                
                     LoginMenu loginMenu = m_menuFactory.buildLoginMenu();
                     m_display.setCurrent(loginMenu.getDisplayable());
                     loginMenu.startLogin();

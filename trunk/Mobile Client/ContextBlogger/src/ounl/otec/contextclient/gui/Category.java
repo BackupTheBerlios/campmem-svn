@@ -19,7 +19,7 @@ package ounl.otec.contextclient.gui;
 /** Object representation of the blog categories.
  *  @author Tim
  */
-class Category
+public class Category
 {
     private String              m_categoryId;
     private String              m_categoryName;

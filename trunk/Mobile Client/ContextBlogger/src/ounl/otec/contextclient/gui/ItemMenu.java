@@ -140,10 +140,32 @@ public class ItemMenu extends VisualMenu
          */
         public void stateUpdated(State s)
         {
-            if (s.equals(getMenuState()))
-            {
-                //a change has taken place in our menu content
-            }
+            /*if (s.equals(getMenuState()))
+            {                
+                Boolean result = (Boolean)s.getValue(CampusConstants.K_RESULT_KEY);
+                if (result.booleanValue())
+                {
+                    //a change has taken place in our menu content
+                    Vector itemNames = (Vector)s.getValue(CampusConstants.K_ITEM_NAMES_KEY);
+                    Vector itemValues = (Vector)s.getValue(CampusConstants.K_ITEM_VALUES_KEY);
+                    if (itemNames.size() == itemValues.size())
+                    {
+                        //clear all previous content from the menu
+                        removeAll();
+                        //add new found content to the item menu
+                        for (int i = 0; i < itemNames.size(); i++)
+                        {
+                            String itemName = (String)itemNames.elementAt(i);
+                            Object itemValue = itemValues.elementAt(i);
+                            //addMenuItem(itemName, VisualMenu subMenu)
+                        }
+                    }
+                }
+                else
+                {
+                    
+                }
+            }*/
         }
         
 	/** Returns the displayable with the graphical representation of this menu

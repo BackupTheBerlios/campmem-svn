@@ -17,16 +17,18 @@ package ounl.otec.contextclient.connection;
  */
 
 import java.util.Vector;
+import blogger.BloggerSEI_Stub;
 import ounl.otec.contextclient.state.*;
+import ounl.otec.contextclient.connection.statehandler.StateHandlerFactory;
 
 /** Manages all connections to the ContextBlogger Service. And schedules and handles
- *  state retrievals from that service.
- *  TODO state changes that have to be send to the server.
+ *  state retrievals from that service.  
  *  @author Tim de Jong
  */
 public class ConnectionManager 
 {
     private Thread              m_stateRetrievalThread;
+    private BloggerSEI_Stub     m_bloggerStub = new BloggerSEI_Stub();
     private Vector              m_stateHandlers = new Vector();
     private Vector              m_stateRetrievalQueue = new Vector();
     private Vector              m_stateChangeQueue = new Vector();
@@ -34,9 +36,11 @@ public class ConnectionManager
     /** Constructor
      */
     public ConnectionManager() 
-    {
+    {        
+        addStateHandlers();
         //start the thread that will handle all state retrievals
         m_stateRetrievalThread = new Thread(new StateRetrievalRunner());
+        m_stateRetrievalThread.run();        
     } 
     
     /** Closes the connection manager, stops the state retrieval thread and closes
@@ -89,7 +93,34 @@ public class ConnectionManager
     {
         m_stateChangeQueue.addElement(s);
     }
+    
+    /**
+     */
+    private void addStateHandlers()
+    {
+        //add all StateHandlers to this Connection Manager
+        StateHandlerFactory factory = new StateHandlerFactory();
         
+        Vector handlers = factory.createHandlers(m_bloggerStub);
+        for (int i = 0; i < handlers.size(); i++)
+        {
+            IStateHandler stateHandler = (IStateHandler)handlers.elementAt(i);
+            addStateHandler(stateHandler);
+        }
+    }
+    
+    private void interruptThread()
+    {
+        try
+        {
+            m_stateRetrievalThread.wait(10000);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+    
     /** Private Class that handles all state retrievals in a separate thread so
      *  the main program is not blocked by them.
      *  @author Tim de Jong
@@ -140,6 +171,10 @@ public class ConnectionManager
                         }                        
                     }
                 }
+                
+System.out.println("retrieval queue " + m_stateRetrievalQueue.size());                
+System.out.println("change queue " + m_stateChangeQueue.size());
+                interruptThread();
             }
         }
     }

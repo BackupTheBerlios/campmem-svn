@@ -16,11 +16,7 @@ package ounl.otec.contextclient.gui;
  *  IN THE SOFTWARE.
  */
 import javax.microedition.lcdui.*;
-import javax.xml.parsers.*;
-import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.Attributes;
 import java.util.Vector;
-import java.io.ByteArrayInputStream;
 import ounl.otec.contextclient.state.State;
 import ounl.otec.contextclient.main.CampusConstants;
 
@@ -40,173 +36,43 @@ public class CategoryMenu extends ItemMenu
     {
         super(ownerDisplay, menuName);      
         
-        m_categoryState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CATEGORY_FILTER_STATE);
+        m_categoryState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CATEGORY_LIST_STATE);
         this.retrieveState(m_categoryState);        
     }
     
     /**
+     *  TODO make more general, so only ItemMenu class is needed!
      */
     public void stateUpdated(State s)
     {
         if (s.equals(m_categoryState))
         {
-            Vector categories = (Vector)s.getValue(CampusConstants.K_CATEGORIES_KEY);
-            //add the categories found to the menu
-            for (int i = 0; i < categories.size(); i++)
+            Boolean result = (Boolean)s.getValue(CampusConstants.K_RESULT_KEY);
+            if (result.booleanValue())
             {
-               Category category = (Category)categories.elementAt(i);                       
-
-               StateChangeMenu categoryChangeMenu = new StateChangeMenu(getOwnerDisplay(),s);
-               categoryChangeMenu.addStateChange(CampusConstants.K_CATEGORY_KEY, category);
-               addMenuItem(category.getName(),categoryChangeMenu);
-            } 
-        }
-    }
-    
-    /** Retrieves all categories from the server.
-     */
-    private class CategoryRetrieve implements Runnable
-    {        
-        private ItemMenu            m_owner;
-
-        public CategoryRetrieve(ItemMenu owner)
-        {
-            m_owner = owner;            
-        }
-
-        public void run()
-        {
-            createCategoryList();
-        }
-
-        public void createCategoryList()
-        {
-            try
-            {
-                //get the blog entries from the server
-                String categoryXML = CampusConstants.K_BLOGGER_STUB.getCategories(CampusConstants.K_MOBILE_ID);
-                //if no security error occured, get the blog entries
-                if (!categoryXML.equals("-1"))
+                Vector categoryNames = (Vector)s.getValue(CampusConstants.K_ITEM_NAMES_KEY);
+                Vector categories = (Vector)s.getValue(CampusConstants.K_ITEM_VALUES_KEY);
+                if (categoryNames.size() == categories.size())
                 {
-                    //convert the string into an inputstream
-                    ByteArrayInputStream str = new ByteArrayInputStream(categoryXML.getBytes());
-                    //get a parser
-                    SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-                    try
-                    {
-                        SAXParser saxParser = parserFactory.newSAXParser();
-                        //parse xml and convert them to blog entry objects
-                        Vector categories = new Vector();
-                        saxParser.parse(str, new CategoryHandler(categories));
-                            
-                        State s = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CATEGORY_FILTER_STATE);
-                        //add the categories found to the menu
-                        for (int i = 0; i < categories.size(); i++)
-                        {
-                           Category category = (Category)categories.elementAt(i);                       
+                    //clear all previous content from the menu
+                    removeAll();
+                    //add the categories found to the menu            
+                    for (int i = 0; i < categoryNames.size(); i++)
+                    {                       
+                       String categoryName = (String)categoryNames.elementAt(i);
+                       Category category = (Category)categories.elementAt(i);                       
 
-                           StateChangeMenu categoryChangeMenu = new StateChangeMenu(m_owner.getOwnerDisplay(),s);
-                           categoryChangeMenu.addStateChange(CampusConstants.K_CATEGORY_KEY, category);
-                           m_owner.addMenuItem(category.getName(),categoryChangeMenu);
-                        } 
-                    }
-                    catch (Exception e)
-                    {                        
+                       StateChangeMenu categoryChangeMenu = new StateChangeMenu(getOwnerDisplay(),s);
+                       categoryChangeMenu.addStateChange(CampusConstants.K_CATEGORY_KEY, category);
+                       addMenuItem(categoryName,categoryChangeMenu);
                     }
                 }
             }
-            catch (java.rmi.RemoteException e)
+            else
             {
-            }		
+                
+            }
         }
-    }
+    }   
     
-    private class CategoryHandler extends DefaultHandler
-    {
-        private final int       K_NO_TAG_TYPE               = -1;
-        private final int       K_CATEGORY_LIST_TYPE        = 0;
-        private final int       K_CATEGORY_TAG_TYPE         = 1;
-        private final int       K_CATEGORY_ID_TAG_TYPE      = 2;
-        private final int       K_CATEGORY_NAME_TAG_TYPE    = 3;
-        
-        private int             m_currentTagType = K_NO_TAG_TYPE;       
-        private Vector          m_categories;
-        private Category        m_currentCategory;
-
-        private String          m_categoryID = "";
-        private String          m_categoryName = "";
-        
-        public CategoryHandler(Vector categories)
-        {                
-            m_categories = categories;
-        }
- 
-/*<?xml version='1.0'?>    
-            <categoryList>
-                <category>
-                    <categoryId>...</categoryId>
-                    <categoryName>...</categoryName>
-                </category>
-            </categoryList>*/
-        public void startElement(java.lang.String uri, java.lang.String localName, java.lang.String qName, Attributes attributes)
-        {                              
-            if (qName.equals("category"))
-            {
-                m_currentCategory = new Category();
-                m_currentTagType = K_CATEGORY_TAG_TYPE;
-            }
-
-            else if (qName.equals("categoryId"))
-            {                   
-                m_currentTagType = K_CATEGORY_ID_TAG_TYPE;
-            }
-            else if (qName.equals("categoryName"))
-            {
-                m_currentTagType = K_CATEGORY_NAME_TAG_TYPE;
-            }           
-        }
-
-        public void characters(char[] ch, int start, int length)
-        {
-            for (int i = start; i < start + length; i++)
-            {
-                if (ch[i] != ' ')
-                {
-                    switch (m_currentTagType)
-                    {                  
-                        case K_CATEGORY_ID_TAG_TYPE:
-                            m_categoryID = m_categoryID + ch[i];
-                        break;
-                        case K_CATEGORY_NAME_TAG_TYPE:
-                            m_categoryName = m_categoryName + ch[i];
-                        break;
-                    }
-                }
-            }
-        }
-
-        public void endElement(java.lang.String uri, java.lang.String localName, java.lang.String qName)
-        {
-            if (qName.equals("category"))
-            {
-               m_categories.addElement(m_currentCategory);               
-               m_currentCategory = null;
-            } 
-            else if (qName.equals("categoryId"))
-            {                    
-                m_currentCategory.setId(m_categoryID);
-                m_categoryID = "";                    
-            }
-            else if (qName.equals("categoryName"))
-            {
-                m_currentCategory.setName(m_categoryName);
-                m_categoryName = "";
-            }           
-        }
-
-        public int getNumberBlogEntries()
-        {
-            return m_categories.size();
-        }
-    }
 }

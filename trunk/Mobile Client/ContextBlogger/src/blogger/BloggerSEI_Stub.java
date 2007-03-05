@@ -17,7 +17,7 @@ public class BloggerSEI_Stub implements blogger.BloggerSEI, javax.xml.rpc.Stub {
 
 	public BloggerSEI_Stub() {
 		_propertyNames = new String[] {ENDPOINT_ADDRESS_PROPERTY};
-		_propertyValues = new Object[] {"http://192.168.0.122:8080/CM1/Blogger"};
+		_propertyValues = new Object[] {"http://LAPTOPTJO:8080/CM1/Blogger"};
 	}
 
 	public void _setProperty(String name, Object value) {

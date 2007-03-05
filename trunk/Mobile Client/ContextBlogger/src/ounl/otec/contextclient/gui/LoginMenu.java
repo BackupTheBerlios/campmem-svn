@@ -47,32 +47,8 @@ public class LoginMenu extends StateTransitionMenu
 	/** Method that starts the login process.
 	 */
 	public void startLogin()
-	{
-		State loginState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_LOGIN_STATE);
-                this.retrieveState(loginState);
-		//change the loginState according to the phase of the login process
-                /*//try to login to the server
-                try
-                {
-                    if (CampusConstants.K_BLOGGER_STUB.login(m_mobileID))
-                    {                    
-                     m_loginCanvas.setLoginStatus(CampusConstants.K_SIGNED_IN);
-                     m_loginState.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_SIGNED_IN);
-System.out.println("signed in");                     
-                    }
-                    else
-                    {
-                     m_loginCanvas.setLoginStatus(CampusConstants.K_LOGIN_FAILED);
-                     m_loginState.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_LOGIN_FAILED);
-System.out.println("login failed");
-                    }
-                }
-                catch(java.rmi.RemoteException e)
-                {
-                     m_loginCanvas.setLoginStatus(CampusConstants.K_LOGIN_FAILED);
-                     m_loginState.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_LOGIN_FAILED);
-System.out.println("login failed " + e.toString());                     
-                }    */            
+	{		
+                retrieveState(m_loginState);                   
 	}
 
 	/** Gets the displayable that is a graphical representation for this LoginMenu.

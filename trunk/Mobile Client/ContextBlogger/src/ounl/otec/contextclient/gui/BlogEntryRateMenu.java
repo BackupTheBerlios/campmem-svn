@@ -28,6 +28,7 @@ public class BlogEntryRateMenu extends VisualMenu
     private BlogEntry           m_entry;
     private Form                m_rateForm;
     private Gauge               m_rateSlider;
+    private State               m_ratingState;
     
     private final Command       K_RATE_COMMAND = new Command("Rate", Command.SCREEN, 2);
     
@@ -39,6 +40,7 @@ public class BlogEntryRateMenu extends VisualMenu
     {
         super(ownerDisplay, "Rate: " + entry.getTitle());
         m_entry = entry;
+        m_ratingState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_RATING_STATE);
         buildRateForm(m_entry);
     }
     
@@ -67,26 +69,10 @@ public class BlogEntryRateMenu extends VisualMenu
         if (c == K_RATE_COMMAND)
         {
            int rating = m_rateSlider.getValue();
-           try
-           {
-                String returnString = CampusConstants.K_BLOGGER_STUB.setRating(CampusConstants.K_MOBILE_ID, m_entry.getObjectID(), m_entry.getPostID(), rating);
-                if(returnString.equals("true"))
-                {
-                    //rating set properly, go back to the parent menu
-                    VisualMenu parentMenu = (VisualMenu) this.getParent();
-                    this.getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
-                }
-                else
-                {
-                    //rating no set properly, reset rate slider
-                    //display error message?
-                    m_rateSlider.setValue(0);
-                }
-           }
-           catch (java.rmi.RemoteException e)
-           {
-               e.printStackTrace();
-           }
+           m_ratingState.setValue(CampusConstants.K_BLOG_ENTRY_KEY, m_entry);
+           m_ratingState.setValue(CampusConstants.K_RATE_KEY, new Integer(rating));           
+           
+           changeState(m_ratingState);
         }
         else
         {
@@ -99,7 +85,22 @@ public class BlogEntryRateMenu extends VisualMenu
      */
     public void stateUpdated(State s)
     {
-
+        if (s.equals(m_ratingState))
+        {
+            Boolean result = (Boolean)s.getValue(CampusConstants.K_RESULT_KEY);
+            if(result.booleanValue())
+            {
+                //rating set properly, go back to the parent menu
+                VisualMenu parentMenu = (VisualMenu) this.getParent();
+                this.getOwnerDisplay().setCurrent(parentMenu.getDisplayable());
+            }
+            else
+            {
+                //rating no set properly, reset rate slider
+                //display error message?
+                m_rateSlider.setValue(0);
+            }
+        }
     }
     
     /** Gets the displayable giving a graphical representation for this menu

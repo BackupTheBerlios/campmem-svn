@@ -19,7 +19,7 @@ package ounl.otec.contextclient.sensor;
 import javax.microedition.lcdui.*;
 import ounl.otec.contextclient.gui.*;
 import ounl.otec.contextclient.main.CampusConstants;
-
+import ounl.otec.contextclient.state.State;
 /** Sensor that allows the user to enter an object id with the mobile device 
  *  keyboard.
  *  @author Tim de Jong
@@ -111,9 +111,17 @@ public class UserEnteredCodeSensor
                  */
 		public UserEnteredSensorMenu(CommandListener owner, Display ownerDisplay)
 		{
-			super(ownerDisplay);
+			super(ownerDisplay, "UserEnteredSensorMenu");
 			m_owner = owner;
 		}
+                
+                /**
+                 *  @param
+                 */
+                public void stateUpdated(State s)
+                {
+
+                }
                 
                 /** Creates the graphical user interface for this sensor and return it.
                  *  @return the graphical representation for this sensor.
