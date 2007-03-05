@@ -47,6 +47,7 @@ public class CampusConstants
         
         public static final String  K_OBJECT_ID_KEY				= "OBJECT_ID";
 	public static final String  K_SENSOR_OWNER				= "SENSOR_OWNER";
+        public static final String  K_SENSOR_DATA_KEY                           = "SENSOR_DATA_KEY";
 	public static final String  K_CANVAS_KEY				= "CANVAS_KEY";
         public static final String  K_BLOG_ENTRY_KEY                            = "BLOG_ENTRY_KEY";
 	public static final String  K_MENU_ID					= "MENU_ID";

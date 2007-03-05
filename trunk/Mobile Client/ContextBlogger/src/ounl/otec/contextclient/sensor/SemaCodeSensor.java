@@ -1,5 +1,4 @@
 package ounl.otec.contextclient.sensor;
-//package ounl.otec.CampusMemories.Mobile;
 /*
  *  Copyright (c) <2007> <Open University of the Netherlands, Tim de Jong, Bashar Al Takrouri, Marcus Specht>
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 

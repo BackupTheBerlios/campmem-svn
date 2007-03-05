@@ -1,7 +1,4 @@
 package ounl.otec.contextclient.sensor;
-import ounl.otec.contextclient.state.IStateListener;
-import ounl.otec.contextclient.state.State;
-//package ounl.otec.CampusMemories.Mobile;
 /*
  *  Copyright (c) <2007> <Open University of the Netherlands, Tim de Jong, Bashar Al Takrouri, Marcus Specht>
  *  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
@@ -18,7 +15,8 @@ import ounl.otec.contextclient.state.State;
  *  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
  *  IN THE SOFTWARE.
  */
-
+import ounl.otec.contextclient.state.IStateListener;
+import ounl.otec.contextclient.state.State;
 /** Provides an interface for class listening to sensor state updates. Also these classes should handle the errors
  *  that can be caused by the sensors.
  *  @author Tim de Jong

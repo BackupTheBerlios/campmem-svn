@@ -28,6 +28,7 @@ import ounl.otec.contextclient.connection.statehandler.StateHandlerFactory;
 public class ConnectionManager 
 {
     private Thread              m_stateRetrievalThread;
+    private boolean             m_isRunning = false;
     private BloggerSEI_Stub     m_bloggerStub = new BloggerSEI_Stub();
     private Vector              m_stateHandlers = new Vector();
     private Vector              m_stateRetrievalQueue = new Vector();
@@ -37,10 +38,7 @@ public class ConnectionManager
      */
     public ConnectionManager() 
     {        
-        addStateHandlers();
-        //start the thread that will handle all state retrievals
-        m_stateRetrievalThread = new Thread(new StateRetrievalRunner());
-        m_stateRetrievalThread.run();        
+        addStateHandlers();                
     } 
     
     /** Closes the connection manager, stops the state retrieval thread and closes
@@ -84,6 +82,7 @@ public class ConnectionManager
     public void requestStateValueRetrieval(State s)
     {
         m_stateRetrievalQueue.addElement(s);
+        startThread();
     }
     
     /** Request a change of a state value on the ContextBlogger Service.
@@ -92,6 +91,7 @@ public class ConnectionManager
     public void requestStateValueChange(State s)
     {
         m_stateChangeQueue.addElement(s);
+        startThread();
     }
     
     /**
@@ -107,17 +107,15 @@ public class ConnectionManager
             IStateHandler stateHandler = (IStateHandler)handlers.elementAt(i);
             addStateHandler(stateHandler);
         }
-    }
+    }    
     
-    private void interruptThread()
+    private void startThread()
     {
-        try
+        if (!m_isRunning)
         {
-            m_stateRetrievalThread.wait(10000);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            //start the thread that will handle all state retrievals
+            m_stateRetrievalThread = new Thread(new StateRetrievalRunner());
+            m_stateRetrievalThread.run();
         }
     }
     
@@ -134,48 +132,49 @@ public class ConnectionManager
         }
         
         public void run()
-        {
-            while (true)
+        {            
+            m_isRunning = true;
+            //handle state retrievals
+            while (!m_stateRetrievalQueue.isEmpty())
             {
-                //handle state retrievals
-                if (!m_stateRetrievalQueue.isEmpty())
-                {
-                    //pop the first element of the queue to handle the state that
-                    //has been waiting the longest for retrieval
-                    State retrieveState = (State)m_stateRetrievalQueue.firstElement();
-                    //loop through the state handlers to see if one of them handles the state
-                    for (int i = 0; i < m_stateHandlers.size(); i++)
-                    {                        
-                        IStateHandler stateHandler = (IStateHandler)m_stateHandlers.elementAt(i);
-                        if (stateHandler.isHandling(retrieveState, true))
-                        {
-                            //if the appropriate state handler has been found, retrieve the state
-                            stateHandler.handleState(retrieveState, true);
-                            //each state can only be handled by one state handler, therefore if
-                            //the state has been retrieved the next state should be handled
-                            break;
-                        }
-                    }
-                }
-                //handles state changes
-                if (!m_stateChangeQueue.isEmpty())
-                {
-                    State changeState = (State)m_stateChangeQueue.firstElement();
-                    for (int i = 0; i < m_stateHandlers.size(); i++)
+                //pop the first element of the queue to handle the state that
+                //has been waiting the longest for retrieval
+                State retrieveState = (State)m_stateRetrievalQueue.firstElement();                
+                //loop through the state handlers to see if one of them handles the state
+                for (int i = 0; i < m_stateHandlers.size(); i++)
+                {                        
+                    IStateHandler stateHandler = (IStateHandler)m_stateHandlers.elementAt(i);
+                    if (stateHandler.isHandling(retrieveState, true))
                     {
-                        IStateHandler stateHandler = (IStateHandler)m_stateHandlers.elementAt(i);
-                        if (stateHandler.isHandling(changeState, false))
-                        {
-                            stateHandler.handleState(changeState, false);
-                            break;
-                        }                        
+                        //if the appropriate state handler has been found, retrieve the state
+                        stateHandler.handleState(retrieveState, true);
+                        //each state can only be handled by one state handler, therefore if
+                        //the state has been retrieved the next state should be handled
+                        break;
                     }
                 }
-                
-System.out.println("retrieval queue " + m_stateRetrievalQueue.size());                
-System.out.println("change queue " + m_stateChangeQueue.size());
-                interruptThread();
+                m_stateRetrievalQueue.removeElement(retrieveState);
             }
+            
+            //handles state changes
+            while (!m_stateChangeQueue.isEmpty())
+            {
+                State changeState = (State)m_stateChangeQueue.firstElement();                
+                for (int i = 0; i < m_stateHandlers.size(); i++)
+                {
+                    IStateHandler stateHandler = (IStateHandler)m_stateHandlers.elementAt(i);
+                    if (stateHandler.isHandling(changeState, false))
+                    {
+                        stateHandler.handleState(changeState, false);
+                        break;
+                    }                        
+                }
+                m_stateChangeQueue.removeElement(changeState);
+            }                
+System.out.println("retrieval queue " + m_stateRetrievalQueue.size());                
+System.out.println("change queue " + m_stateChangeQueue.size());               
+           m_isRunning = false; 
         }
+        
     }
 }

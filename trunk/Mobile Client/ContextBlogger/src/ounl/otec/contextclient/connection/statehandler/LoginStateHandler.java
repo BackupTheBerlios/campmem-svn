@@ -36,16 +36,19 @@ public class LoginStateHandler extends BloggerStateHandler
     }
     
     public boolean isHandling(State s, boolean retrieve)
-    {
-System.out.println("here: isHandling");        
-        return (retrieve && s.equals(m_loginState));
+    {   
+        boolean test = (retrieve && s.equals(m_loginState));
+System.out.println(s.getStateName() + " " + m_loginState.getStateName());
+        System.out.println("test" + test + " " + retrieve + " " + s.equals(m_loginState));        
+        return test;
     }
     
     public void handleState(State s, boolean retrieve)
     {
-System.out.println("here: handleState");        
+System.out.println("login: handleState 0");        
         if (retrieve && s.equals(m_loginState))
         {
+System.out.println("login: handleState 1");           
             //try to login to the server
             try
             {
