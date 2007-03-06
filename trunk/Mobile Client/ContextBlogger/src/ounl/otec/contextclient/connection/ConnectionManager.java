@@ -170,9 +170,7 @@ public class ConnectionManager
                     }                        
                 }
                 m_stateChangeQueue.removeElement(changeState);
-            }                
-System.out.println("retrieval queue " + m_stateRetrievalQueue.size());                
-System.out.println("change queue " + m_stateChangeQueue.size());               
+            }                               
            m_isRunning = false; 
         }
         

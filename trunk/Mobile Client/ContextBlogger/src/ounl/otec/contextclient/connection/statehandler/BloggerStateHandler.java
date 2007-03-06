@@ -31,6 +31,7 @@ public abstract class BloggerStateHandler implements IStateHandler
      */
     public BloggerStateHandler(BloggerSEI_Stub bloggerStub) 
     {
+        m_bloggerStub = bloggerStub;
     }
     
     public void setBloggerStub(BloggerSEI_Stub bloggerStub)
@@ -44,8 +45,13 @@ public abstract class BloggerStateHandler implements IStateHandler
     }
     
     public void setOperationResult(State s, boolean result)
+    {
+        setOperationResult(s, result, false);
+    }
+    
+    public void setOperationResult(State s, boolean result, boolean notify)
     {     
-        s.setValue(CampusConstants.K_RESULT_KEY, new Boolean(result));       
+        s.setValue(CampusConstants.K_RESULT_KEY, new Boolean(result), notify);       
     }
     
     public abstract boolean isHandling(State s, boolean retrieve);

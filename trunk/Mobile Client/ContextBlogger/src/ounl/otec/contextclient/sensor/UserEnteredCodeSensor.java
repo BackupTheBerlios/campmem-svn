@@ -66,8 +66,8 @@ public class UserEnteredCodeSensor
 		{
 			//get the entered code value
 			String code = m_codeBox.getString();
-			//add the entered code as object id to sensor data
-			this.setValue(CampusConstants.K_OBJECT_ID_KEY, code);
+			//add the entered code as object id to sensor data			
+                        this.setValue(CampusConstants.K_OBJECT_ID_KEY, code);
 			//notify the sensor listeners of the update
 			//notifySensorUpdate();                                                
 		}

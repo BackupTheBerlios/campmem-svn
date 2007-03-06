@@ -37,6 +37,7 @@ public class CategoryMenu extends ItemMenu
         super(ownerDisplay, menuName);      
         
         m_categoryState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_CATEGORY_LIST_STATE);
+        m_categoryState.addStateListener(this);
         this.retrieveState(m_categoryState);        
     }
     

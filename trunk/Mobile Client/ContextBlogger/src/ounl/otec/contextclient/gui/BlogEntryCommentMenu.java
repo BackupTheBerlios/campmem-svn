@@ -63,6 +63,7 @@ public class BlogEntryCommentMenu extends VisualMenu
            if (!commentText.equals(""))
            {
                State commentState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_COMMENT_STATE);
+               commentState.addStateListener(this);
                commentState.setValue(CampusConstants.K_BLOG_ENTRY_KEY, m_entry);
                commentState.setValue(CampusConstants.K_COMMENT_KEY, commentText);
                changeState(commentState); 

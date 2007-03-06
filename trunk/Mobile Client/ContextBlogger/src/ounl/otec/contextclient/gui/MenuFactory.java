@@ -18,9 +18,7 @@ package ounl.otec.contextclient.gui;
 import java.util.*;
 import javax.microedition.lcdui.*;
 import ounl.otec.contextclient.gui.*;
-import ounl.otec.contextclient.sensor.SemaCodeSensor;
-import ounl.otec.contextclient.sensor.Sensor;
-import ounl.otec.contextclient.sensor.UserEnteredCodeSensor;
+import ounl.otec.contextclient.sensor.*;
 import ounl.otec.contextclient.state.ObjectIdStateListener;
 import ounl.otec.contextclient.state.State;
 import ounl.otec.contextclient.main.CampusMIDlet;
@@ -153,6 +151,8 @@ public class MenuFactory
 		m_availableSensors.put(userCodeSensor.getName(), userCodeSensor);
 
 		//m_selectedSensor = semaCodeSensor;
+                DummySensor dummySensor = new DummySensor(m_ownerDisplay);
+                m_availableSensors.put(dummySensor.getName(), dummySensor);
 	}
 
 	private VisualMenu buildScanObjectMenu(VisualMenu sensorListMenu, State s)

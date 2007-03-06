@@ -54,6 +54,7 @@ public class CommentStateHandler extends BloggerStateHandler
     {
         if(s.equals(m_commentState))
         {
+            setOperationResult(s, false);
             if (!retrieve)
             {
                //post the comment
@@ -62,7 +63,7 @@ public class CommentStateHandler extends BloggerStateHandler
                     BlogEntry entry = (BlogEntry)s.getValue(CampusConstants.K_BLOG_ENTRY_KEY);
                     String commentText = (String)s.getValue(CampusConstants.K_COMMENT_KEY);
                     String test = getBloggerStub().postComment(CampusConstants.K_MOBILE_ID, entry.getPostID(), commentText);
-                    setOperationResult(s, true);
+                    setOperationResult(s, true, true);
                }
                catch (java.rmi.RemoteException e)
                {

@@ -41,6 +41,11 @@ public class BlogEntryRateMenu extends VisualMenu
         super(ownerDisplay, "Rate: " + entry.getTitle());
         m_entry = entry;
         m_ratingState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_RATING_STATE);
+        m_ratingState.addStateListener(this);
+        /*m_ratingState.setValue(CampusConstants.K_OBJECT_ID_KEY, entry.getObjectID());
+        m_ratingState.setValue(CampusConstants.K_BLOG_ENTRY_KEY, entry);
+        retrieveState(m_ratingState);*/
+        
         buildRateForm(m_entry);
     }
     

@@ -44,7 +44,7 @@ public class ObjectIdStateListener implements IStateListener
     public void stateUpdated(State s)
     {
         //update the objectID state to the current
-        Object newObjectID = s.getValue(CampusConstants.K_OBJECT_ID_KEY);
+        Object newObjectID = s.getValue(CampusConstants.K_OBJECT_ID_KEY);       
         m_objectIDState.setValue(CampusConstants.K_OBJECT_ID_KEY, newObjectID);
     }
 }

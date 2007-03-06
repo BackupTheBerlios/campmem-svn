@@ -59,6 +59,7 @@ public class CategoryListRetrieveHandler extends BloggerStateHandler
     {
         try
         {
+            setOperationResult(s, false);
             //get the blog entries from the server
             String categoryXML = getBloggerStub().getCategories(CampusConstants.K_MOBILE_ID);
             //if no security error occured, get the blog entries
@@ -84,10 +85,10 @@ public class CategoryListRetrieveHandler extends BloggerStateHandler
                        categoryNames.addElement(category.getName());                       
                     } 
                     //add the categories found and their names to the state
-                    s.setValue(CampusConstants.K_ITEM_NAMES_KEY, categoryNames);
-                    s.setValue(CampusConstants.K_ITEM_VALUES_KEY, categories);
+                    s.setValue(CampusConstants.K_ITEM_NAMES_KEY, categoryNames, false);
+                    s.setValue(CampusConstants.K_ITEM_VALUES_KEY, categories, false);
                     
-                    setOperationResult(s, true);
+                    setOperationResult(s, true, true);
                 }
                 catch (Exception e)
                 {

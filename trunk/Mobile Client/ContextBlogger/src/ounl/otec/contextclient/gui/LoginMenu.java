@@ -102,7 +102,7 @@ public class LoginMenu extends StateTransitionMenu
 		 */
 		public void paint(Graphics g)
 		{
-                     g.setColor(0,0,255);                     
+                     g.setColor(0,0,0);                     
                      g.fillRect(0,0,getWidth(), getHeight());
                      g.drawString("Logged in", 30, 30, Graphics.TOP|Graphics.LEFT);
 			/*if(m_loginStatus.equals(CampusConstants.K_INIT_LOGIN))

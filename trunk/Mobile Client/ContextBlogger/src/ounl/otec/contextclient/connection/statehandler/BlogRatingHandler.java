@@ -34,7 +34,7 @@ public class BlogRatingHandler extends BloggerStateHandler
     public BlogRatingHandler(BloggerSEI_Stub bloggerStub) 
     {
         super(bloggerStub);
-        m_ratingState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_RATING_STATE);
+        m_ratingState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_RATING_STATE);        
     }
     
     public boolean isHandling(State s, boolean retrieve)
@@ -46,6 +46,7 @@ public class BlogRatingHandler extends BloggerStateHandler
     {
         if (s.equals(m_ratingState))
         {
+            setOperationResult(s, false);
             String returnString = "";
             try
             {
@@ -57,7 +58,7 @@ public class BlogRatingHandler extends BloggerStateHandler
                            
                    returnString = getBloggerStub().getRating(CampusConstants.K_MOBILE_ID, objectID, entry.getPostID());                   
                    int rating = Integer.parseInt(returnString);  
-                   s.setValue(CampusConstants.K_RATE_KEY, new Integer(rating));
+                   s.setValue(CampusConstants.K_RATE_KEY, new Integer(rating), false);
                 }
                 else
                 {
@@ -70,7 +71,7 @@ public class BlogRatingHandler extends BloggerStateHandler
                 //find out if the operation was successful.
                 if (!returnString.equals("false") && !returnString.equals("-1"))
                 {
-                    setOperationResult(s, true);
+                    setOperationResult(s, true, true);
                 }
                 else
                 {

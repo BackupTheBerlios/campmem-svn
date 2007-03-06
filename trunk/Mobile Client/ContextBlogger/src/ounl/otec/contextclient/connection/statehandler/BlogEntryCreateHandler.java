@@ -31,7 +31,7 @@ public class BlogEntryCreateHandler extends BloggerStateHandler
     public BlogEntryCreateHandler(BloggerSEI_Stub bloggerStub) 
     {
         super(bloggerStub);
-        m_entryCreateState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_CREATE_STATE);
+        m_entryCreateState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_CREATE_STATE);       
     }
     
     public boolean isHandling(State s, boolean retrieve)
@@ -50,10 +50,11 @@ public class BlogEntryCreateHandler extends BloggerStateHandler
     {
         if (!retrieve && s.equals(m_entryCreateState))
         {
+             setOperationResult(s, false);
             //post the blog entry to the blog
             try
             {
-               String objectID = (String)s.getValue(CampusConstants.K_OBJECT_ID_KEY);
+               String objectID = (String)s.getValue(CampusConstants.K_OBJECT_ID_KEY);              
                String categories = (String)s.getValue(CampusConstants.K_CATEGORIES_KEY);
                String title = (String)s.getValue(CampusConstants.K_TITLE_KEY);
                String body = (String)s.getValue(CampusConstants.K_BODY_KEY);
@@ -66,7 +67,8 @@ public class BlogEntryCreateHandler extends BloggerStateHandler
                State objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
                objectIDState.setValue(CampusConstants.K_OBJECT_ID_KEY, objectID);
                
-               this.setOperationResult(s, true);
+               
+               this.setOperationResult(s, true, true);
             }
             catch (java.rmi.RemoteException e)
             {

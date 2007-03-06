@@ -41,6 +41,7 @@ public abstract class VisualMenu    extends Menu
 		this(ownerDisplay, menuName, true, false); 
                 //create a state for this menu
                 m_menuState = CampusConstants.K_STATE_FACTORY.getState(menuName);
+                m_menuState.addStateListener(this);
 	}
 
 	/** Constructor

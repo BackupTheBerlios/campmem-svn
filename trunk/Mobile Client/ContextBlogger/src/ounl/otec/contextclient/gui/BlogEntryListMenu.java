@@ -37,7 +37,8 @@ public class BlogEntryListMenu  extends ItemMenu
 	public BlogEntryListMenu(Display ownerDisplay, String menuName)
 	{
 		super(ownerDisplay, menuName); 
-                m_entriesState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRIES_STATE);               
+                m_entriesState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_LIST_STATE); 
+                m_entriesState.addStateListener(this);                
 	}
        
         /** Constructor
@@ -98,7 +99,13 @@ public class BlogEntryListMenu  extends ItemMenu
             }
             else
             {
-                m_objectID = (String)s.getValue(CampusConstants.K_OBJECT_ID_KEY);                           
+                m_objectID = (String)s.getValue(CampusConstants.K_OBJECT_ID_KEY);
+                if (m_objectID != null && m_entriesState != null)//find the bug causing this
+                {
+System.out.println(m_entriesState);                    
+                    m_entriesState.setValue(CampusConstants.K_OBJECT_ID_KEY, m_objectID, false);
+                    retrieveState(m_entriesState);
+                }
             }  
         
         }     

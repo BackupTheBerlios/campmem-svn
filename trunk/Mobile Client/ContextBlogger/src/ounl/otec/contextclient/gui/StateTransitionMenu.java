@@ -76,7 +76,8 @@ public class StateTransitionMenu	extends VisualMenu
          */
 	public void stateUpdated(State s)
 	{
-		if (m_transitionState.equals(s))
+		
+                if (m_transitionState.equals(s))
 		{
 			String menuID = (String)s.getValue(CampusConstants.K_MENU_ID);
 			//find the newly chosen menu to transfer to when this menu is chosen

@@ -71,6 +71,7 @@ public class CampusConstants
         public static final String  K_CATEGORY_FILTER_MENU_STATE                = "CATEGORY_FILTER_MENU_STATE";
         public static final String  K_COMMENT_STATE                             = "COMMENT_STATE";
         public static final String  K_ENTRY_CREATE_STATE                        = "ENTRY_CREATE_STATE";
+        public static final String  K_ENTRY_LIST_STATE                          = "ENTRY_LIST_STATE";
         public static final String  K_RATING_STATE                              = "RATING_STATE";
         public static final String  K_QUIT_STATE                                = "QUIT_STATE";        
         //login constants

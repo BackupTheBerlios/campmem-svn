@@ -56,6 +56,21 @@ public class State
 		notifyUpdate();
 	}
 
+        /** Sets a key-value pair describing a property of this state.
+         *  @param valueKey the key describing the property, ie. the name of 
+         *  the property to be set.
+         *  @param value the value of the property to be set.
+         *  @param notify 
+	 */
+	public void setValue(String valueKey, Object value, boolean notify)
+	{
+		m_values.put(valueKey, value);
+		if (notify)
+                {
+                    notifyUpdate();
+                }
+	}
+        
 	/** Removes a key-value pair describing a property of this state.
          *  @param valueKey the key describing the property to be deleted.
 	 */

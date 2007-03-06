@@ -37,30 +37,27 @@ public class LoginStateHandler extends BloggerStateHandler
     
     public boolean isHandling(State s, boolean retrieve)
     {   
-        boolean test = (retrieve && s.equals(m_loginState));
-System.out.println(s.getStateName() + " " + m_loginState.getStateName());
-        System.out.println("test" + test + " " + retrieve + " " + s.equals(m_loginState));        
+        boolean test = (retrieve && s.equals(m_loginState));      
         return test;
     }
     
     public void handleState(State s, boolean retrieve)
     {
-System.out.println("login: handleState 0");        
         if (retrieve && s.equals(m_loginState))
         {
-System.out.println("login: handleState 1");           
+            //setOperationResult(s, false);
             //try to login to the server
             try
             {
                 if (getBloggerStub().login(CampusConstants.K_MOBILE_ID))
                 {                    
-                    s.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_SIGNED_IN);    
+                    s.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_SIGNED_IN, false);    
                 }
                 else
                 {            
-                    s.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_LOGIN_FAILED);    
+                    s.setValue(CampusConstants.K_MENU_ID, CampusConstants.K_LOGIN_FAILED, false);    
                 }
-                setOperationResult(s, true);
+                setOperationResult(s, true, true);
             }
             catch(java.rmi.RemoteException e)
             {             

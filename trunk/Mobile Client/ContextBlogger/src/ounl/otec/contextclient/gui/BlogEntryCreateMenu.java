@@ -36,6 +36,7 @@ public class BlogEntryCreateMenu extends VisualMenu
     {
         super (ownerDisplay, menuName);
         m_entryCreateState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_CREATE_STATE);
+        m_entryCreateState.addStateListener(this);
         createMenu();
     }
     
@@ -67,16 +68,16 @@ public class BlogEntryCreateMenu extends VisualMenu
         if (c == CampusConstants.K_SUBMIT_COMMAND)
         {
            //get the entered blog parameters
-           m_entryCreateState.setValue(CampusConstants.K_TITLE_KEY, m_titleField.getString());
-           m_entryCreateState.setValue(CampusConstants.K_BODY_KEY, m_bodyField.getString());
+           m_entryCreateState.setValue(CampusConstants.K_TITLE_KEY, m_titleField.getString(), false);
+           m_entryCreateState.setValue(CampusConstants.K_BODY_KEY, m_bodyField.getString(), false);
            //maybe it's a good idea to make one state for the object id, this state can be updated 
            //and queried whenever the object id is needed.           
            State objectIDState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_OBJECT_ID_STATE);
            String objectID = (String)objectIDState.getValue(CampusConstants.K_OBJECT_ID_KEY);
-           m_entryCreateState.setValue(CampusConstants.K_OBJECT_ID_KEY, objectID);
+           m_entryCreateState.setValue(CampusConstants.K_OBJECT_ID_KEY, objectID, false);
            
            String categories = "";                      
-           m_entryCreateState.setValue(CampusConstants.K_CATEGORIES_KEY, categories);
+           m_entryCreateState.setValue(CampusConstants.K_CATEGORIES_KEY, categories, false);
            //request a state change to add a blog entry to the blog
            changeState(m_entryCreateState);
            this.setWaiting(true);
@@ -94,6 +95,7 @@ public class BlogEntryCreateMenu extends VisualMenu
         if (s.equals(m_entryCreateState))
         {
             Boolean result = (Boolean)m_entryCreateState.getValue(CampusConstants.K_RESULT_KEY);
+System.out.println("create result " + result.booleanValue());           
             if (result.booleanValue())
             {
                 this.setWaiting(false);

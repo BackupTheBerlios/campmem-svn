@@ -41,7 +41,7 @@ public class BlogListRetrieveHandler extends BloggerStateHandler
     public BlogListRetrieveHandler(BloggerSEI_Stub bloggerStub) 
     {
         super(bloggerStub);
-        m_blogEntryState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRIES_STATE);
+        m_blogEntryState = CampusConstants.K_STATE_FACTORY.getState(CampusConstants.K_ENTRY_LIST_STATE);
     }
     
     
@@ -62,7 +62,8 @@ public class BlogListRetrieveHandler extends BloggerStateHandler
     private void createBlogList(State s)
     {
         String objectID = (String)s.getValue(CampusConstants.K_OBJECT_ID_KEY);
-        
+        setOperationResult(s, false);
+ System.out.println("createBlogList objectID" + objectID);       
         try
         {
             //get the blog entries from the server
@@ -83,14 +84,19 @@ public class BlogListRetrieveHandler extends BloggerStateHandler
                     saxParser.parse(str,new BlogEntryHandler(entries));
                    //add the blog entries found to the menu
 System.out.println("entries size" + entries.size());                     
+                    Vector blogEntryNames = new Vector();
                     for (int i = 0; i < entries.size();i++)
                     {
-                       BlogEntry entry = (BlogEntry)entries.elementAt(i);
+                       BlogEntry entry = (BlogEntry)entries.elementAt(i);                       
                        entry.setObjectID(objectID);
-
-                                                  
-                    }                     
-                    setOperationResult(s, true);
+                       
+                       blogEntryNames.addElement(entry.getTitle());
+                    }  
+                    //add the categories found and their names to the state
+                    s.setValue(CampusConstants.K_ITEM_NAMES_KEY, blogEntryNames, false);
+                    s.setValue(CampusConstants.K_ITEM_VALUES_KEY, entries, false);
+                    
+                    setOperationResult(s, true, true);
                 }
                 catch (Exception e)
                 {    
